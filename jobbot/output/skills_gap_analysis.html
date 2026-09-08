@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Skills Gap Analysis</title>
+<style>
+@page {
+  size: A4; margin: 17mm 16mm 16mm 16mm;
+  @bottom-center {
+    content: "Skills gap analysis — Ömer Sayilgan — page " counter(page) " of " counter(pages);
+    font-family: "DejaVu Sans", sans-serif; font-size: 7.5pt; color: #8A93A0;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  font-family: "DejaVu Sans", "Liberation Sans", sans-serif;
+  font-size: 9.1pt; line-height: 1.46; color: #16202B; margin: 0;
+}
+h1 { font-size: 20pt; letter-spacing: -.5pt; margin: 0 0 3mm; line-height: 1.12; }
+h2 {
+  font-size: 12pt; margin: 9mm 0 1mm; padding-bottom: 1.4mm;
+  border-bottom: 1.6pt solid #16202B; letter-spacing: -.2pt;
+  break-after: avoid;
+}
+h2.first { margin-top: 5mm; }
+h3 { font-size: 9.6pt; margin: 5mm 0 1.5mm; color: #2B3947; break-after: avoid; }
+p { margin: 0 0 2.2mm; }
+.eyebrow {
+  font-size: 7.6pt; letter-spacing: 1.3pt; text-transform: uppercase;
+  color: #6B7684; margin: 0 0 2mm;
+}
+.lede { font-size: 10pt; color: #33414F; max-width: 145mm; }
+.meta { font-size: 8pt; color: #6B7684; margin-top: 2mm; }
+.summary {
+  background: #F2F5F8; border-left: 2.6pt solid #14508C;
+  padding: 4mm 5mm; margin: 5mm 0 0;
+}
+.summary ul { margin: 1.5mm 0 0; padding-left: 5mm; }
+.summary li { margin-bottom: 1mm; }
+table { width: 100%; border-collapse: collapse; margin-top: 2mm; }
+thead th {
+  font-size: 7.4pt; text-transform: uppercase; letter-spacing: .5pt;
+  color: #6B7684; text-align: left; padding: 0 2mm 1.4mm;
+  border-bottom: .8pt solid #C9D2DC; font-weight: normal;
+}
+tbody tr { break-inside: avoid; }
+td { padding: 2.4mm 2mm; border-bottom: .5pt solid #E3E9EF; vertical-align: top; }
+td.rank {
+  width: 7mm; color: #9AA4B2; font-size: 8.4pt; text-align: right;
+  padding-right: 1.5mm;
+}
+td.skill { width: 96mm; }
+td.skill b { font-size: 9.6pt; }
+.grp { display: block; font-size: 7.4pt; color: #8A93A0; margin-top: .4mm; }
+.note { font-size: 8.2pt; color: #4A5867; margin: 1.2mm 0 0; font-style: italic; }
+.action { font-size: 8.3pt; color: #16202B; margin: 1.4mm 0 0; }
+.action b { color: #14508C; }
+.num { text-align: right; white-space: nowrap; font-size: 9.4pt; }
+.sub { display: block; font-size: 7pt; color: #9AA4B2; }
+.imp { width: 26mm; white-space: nowrap; }
+.bar {
+  display: inline-block; width: 15mm; height: 2.6mm; background: #E3E9EF;
+  border-radius: 1.3mm; overflow: hidden; vertical-align: middle;
+}
+.bar i { display: block; height: 100%; }
+.l-gap { background: #B3452F; } .l-partial { background: #B07818; }
+.l-have { background: #1B7A4B; }
+.impn { font-size: 8.4pt; color: #4A5867; margin-left: 1.6mm; vertical-align: middle; }
+.flag {
+  font-size: 6.8pt; text-transform: uppercase; letter-spacing: .5pt;
+  background: #F6E7DC; color: #96431F; padding: .5mm 1.4mm;
+  border-radius: 1mm; margin-left: 2mm; vertical-align: 1mm;
+}
+.callout {
+  border: .8pt solid #D8C6A8; background: #FBF7EF; padding: 4mm 5mm;
+  margin: 3mm 0 0; break-inside: avoid;
+}
+.callout h3 { margin-top: 0; }
+.method { font-size: 8.2pt; color: #4A5867; }
+.method li { margin-bottom: 1.4mm; }
+</style></head><body>
+
+<p class="eyebrow">Prepared from 96 live Munich job descriptions &middot; 27 August 2026</p>
+<h1>What these jobs ask for, and what you are missing</h1>
+<p class="lede">Every skill below was counted across the 96 best-fitting
+engineering roles currently open in the Munich area, drawn from 31
+employers. Ranked by how much closing the gap would change your prospects.</p>
+<p class="meta">Scope: roles scoring 38 or above against your CV and
+transcripts — tiers 1&ndash;3 of the ranked shortlist. Weaker matches are excluded
+so the priorities reflect jobs you could realistically win.</p>
+
+<div class="summary">
+  <b>The short version</b>
+  <ul><li><b>Functional safety</b> — asked for by 17 roles across 7 employers</li><li><b>CI/CD</b> — asked for by 13 roles across 7 employers</li><li><b>Perception / CV</b> — asked for by 10 roles across 5 employers</li></ul>
+  <p style="margin:2mm 0 0; font-size:8.6pt;">Your control, simulation and PLC
+  foundations are already competitive. What separates you from these postings is
+  not more control theory &mdash; it is modern software practice and the safety
+  vocabulary the aerospace employers write into every advert.</p>
+</div>
+
+<h2 class="first">1. Gaps worth closing &mdash; wanted across many employers</h2>
+<p>These are ranked by importance: how many roles ask, how many distinct
+employers ask, and how well those roles otherwise fit you.</p>
+<table>
+          <thead><tr>
+            <th></th><th>Skill</th><th class="num">Jobs</th>
+            <th class="num">Employers</th><th class="num">Avg fit</th>
+            <th>Importance</th>
+          </tr></thead><tbody><tr>
+          <td class="rank">1</td>
+          <td class="skill"><b>Functional safety</b>
+              <span class="grp">Safety, standards &amp; process</span><p class="action"><b>Do this:</b> Read ISO 26262 part 6 and DO-178C DAL definitions, then re-frame your Roketsan HIL work in safety terms (requirements → test → evidence). A short course certificate is cheap and shows intent.</p></td>
+          <td class="num">17<span class="sub">of 96</span></td>
+          <td class="num">7<span class="sub">of 31</span></td>
+          <td class="num">64</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:57%"></i></span>
+              <span class="impn">29</span></td>
+        </tr><tr>
+          <td class="rank">2</td>
+          <td class="skill"><b>CI/CD</b>
+              <span class="grp">Software engineering practice</span><p class="action"><b>Do this:</b> Highest effort-to-reward item on this list. Put your thesis Simulink and Python code in GitLab with a pipeline that runs tests and builds on every push. One weekend; visible on your CV forever.</p></td>
+          <td class="num">13<span class="sub">of 96</span></td>
+          <td class="num">7<span class="sub">of 31</span></td>
+          <td class="num">67</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:55%"></i></span>
+              <span class="impn">27</span></td>
+        </tr><tr>
+          <td class="rank">3</td>
+          <td class="skill"><b>Perception / CV</b>
+              <span class="grp">Robotics &amp; autonomy</span><p class="action"><b>Do this:</b> Pairs naturally with your ROS grade. Working through OpenCV plus a small point-cloud project would open the Munich robotics cluster (NavVis, RobCo, Magazino, Agile Robots).</p></td>
+          <td class="num">10<span class="sub">of 96</span></td>
+          <td class="num">5<span class="sub">of 31</span></td>
+          <td class="num">57</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:43%"></i></span>
+              <span class="impn">22</span></td>
+        </tr><tr>
+          <td class="rank">4</td>
+          <td class="skill"><b>Aerospace standards</b>
+              <span class="grp">Safety, standards &amp; process</span><p class="action"><b>Do this:</b> ECSS and DO-178C vocabulary matters at Isar, RFA and The Exploration Company. Reading the standard summaries costs a day and lets you speak the language in interviews.</p></td>
+          <td class="num">8<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">55</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:39%"></i></span>
+              <span class="impn">19</span></td>
+        </tr></tbody></table>
+
+<h2>2. Gaps concentrated at a single employer</h2>
+<p>These look significant by raw count but come from one company's postings.
+Learn them only if you are targeting that employer specifically &mdash; otherwise
+they are a poor use of your time.</p>
+<table>
+          <thead><tr>
+            <th></th><th>Skill</th><th class="num">Jobs</th>
+            <th class="num">Employers</th><th class="num">Avg fit</th>
+            <th>Importance</th>
+          </tr></thead><tbody><tr>
+          <td class="rank">1</td>
+          <td class="skill"><b>Distributed systems</b><span class="flag">one employer</span>
+              <span class="grp">Software engineering practice</span><p class="action"><b>Do this:</b> Mostly Helsing&#x27;s house requirement. Worth a conceptual grounding (gRPC, message brokers, DDS) only if you target them specifically.</p></td>
+          <td class="num">30<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">58</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:60%"></i></span>
+              <span class="impn">30</span></td>
+        </tr><tr>
+          <td class="rank">2</td>
+          <td class="skill"><b>Reinforcement learning</b><span class="flag">one employer</span>
+              <span class="grp">Robotics &amp; autonomy</span><p class="action"><b>Do this:</b> Entirely Helsing. Ignore unless you are set on their AI roles.</p></td>
+          <td class="num">25<span class="sub">of 96</span></td>
+          <td class="num">1<span class="sub">of 31</span></td>
+          <td class="num">56</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:48%"></i></span>
+              <span class="impn">24</span></td>
+        </tr><tr>
+          <td class="rank">3</td>
+          <td class="skill"><b>Security clearance</b><span class="flag">one employer</span>
+              <span class="grp">Eligibility &amp; language</span><p class="note">Requires German residency history; generally closed to non-EU nationals early on.</p><p class="action"><b>Do this:</b> Not a skill and not something you can prepare for. See the eligibility note — check directly with the employer rather than self-selecting out.</p></td>
+          <td class="num">7<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">80</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:43%"></i></span>
+              <span class="impn">22</span></td>
+        </tr><tr>
+          <td class="rank">4</td>
+          <td class="skill"><b>Rust</b><span class="flag">one employer</span>
+              <span class="grp">Languages &amp; programming</span><p class="action"><b>Do this:</b> Concentrated at Helsing. Do not learn it before the broader gaps.</p></td>
+          <td class="num">14<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">63</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:43%"></i></span>
+              <span class="impn">21</span></td>
+        </tr><tr>
+          <td class="rank">5</td>
+          <td class="skill"><b>Machine learning</b><span class="flag">one employer</span>
+              <span class="grp">Robotics &amp; autonomy</span><p class="action"><b>Do this:</b> Broad but shallow demand in your target roles. A practical PyTorch grounding is enough; you are not competing for research posts.</p></td>
+          <td class="num">14<span class="sub">of 96</span></td>
+          <td class="num">3<span class="sub">of 31</span></td>
+          <td class="num">56</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:42%"></i></span>
+              <span class="impn">21</span></td>
+        </tr><tr>
+          <td class="rank">6</td>
+          <td class="skill"><b>Kubernetes/cloud</b><span class="flag">one employer</span>
+              <span class="grp">Software engineering practice</span><p class="action"><b>Do this:</b> Peripheral to control and embedded work. Lowest priority here.</p></td>
+          <td class="num">8<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">51</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:37%"></i></span>
+              <span class="impn">18</span></td>
+        </tr><tr>
+          <td class="rank">7</td>
+          <td class="skill"><b>Go</b><span class="flag">one employer</span>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">10<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">57</td>
+          <td class="imp"><span class="bar"><i class="l-gap" style="width:37%"></i></span>
+              <span class="impn">18</span></td>
+        </tr></tbody></table>
+
+<h2>3. Partial &mdash; you have the theory, not the evidence</h2>
+<p>The cheapest wins on this document. In each case you already studied the
+subject; what is missing is something demonstrable a recruiter can see.</p>
+<table>
+          <thead><tr>
+            <th></th><th>Skill</th><th class="num">Jobs</th>
+            <th class="num">Employers</th><th class="num">Avg fit</th>
+            <th>Importance</th>
+          </tr></thead><tbody><tr>
+          <td class="rank">1</td>
+          <td class="skill"><b>C++</b>
+              <span class="grp">Languages &amp; programming</span><p class="note">Advanced Programming 1.7 and Simulink-generated code — but no large hand-written C++ codebase</p></td>
+          <td class="num">37<span class="sub">of 96</span></td>
+          <td class="num">12<span class="sub">of 31</span></td>
+          <td class="num">62</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:86%"></i></span>
+              <span class="impn">43</span></td>
+        </tr><tr>
+          <td class="rank">2</td>
+          <td class="skill"><b>Agile / Scrum</b><span class="flag">one employer</span>
+              <span class="grp">Software engineering practice</span></td>
+          <td class="num">16<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">57</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:47%"></i></span>
+              <span class="impn">23</span></td>
+        </tr><tr>
+          <td class="rank">3</td>
+          <td class="skill"><b>Bus protocols</b>
+              <span class="grp">Embedded &amp; real-time</span><p class="note">RS-485 and serial at Phlair; CAN is the common gap for automotive and space</p><p class="action"><b>Do this:</b> You have RS-485 and serial; CAN is the common missing piece in both space and automotive. A cheap CAN transceiver and a weekend closes it.</p></td>
+          <td class="num">9<span class="sub">of 96</span></td>
+          <td class="num">6<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:46%"></i></span>
+              <span class="impn">23</span></td>
+        </tr><tr>
+          <td class="rank">4</td>
+          <td class="skill"><b>Verification &amp; validation</b>
+              <span class="grp">Modelling, simulation &amp; test</span></td>
+          <td class="num">13<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">59</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:45%"></i></span>
+              <span class="impn">22</span></td>
+        </tr><tr>
+          <td class="rank">5</td>
+          <td class="skill"><b>Orbital mechanics</b>
+              <span class="grp">Control, GNC &amp; estimation</span></td>
+          <td class="num">4<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">80</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:40%"></i></span>
+              <span class="impn">20</span></td>
+        </tr><tr>
+          <td class="rank">6</td>
+          <td class="skill"><b>ROS 2</b>
+              <span class="grp">Robotics &amp; autonomy</span><p class="note">Graded 1.0 in Introduction to ROS — but industry has moved to ROS 2</p><p class="action"><b>Do this:</b> You have ROS 1 at grade 1.0; industry has moved on. Porting one of your lab projects to ROS 2 converts an existing strength into a current one — very high value for the effort.</p></td>
+          <td class="num">5<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">64</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:39%"></i></span>
+              <span class="impn">20</span></td>
+        </tr><tr>
+          <td class="rank">7</td>
+          <td class="skill"><b>RTOS</b>
+              <span class="grp">Embedded &amp; real-time</span><p class="note">Echtzeitsysteme 2.0 is coursework; no RTOS shipped</p><p class="action"><b>Do this:</b> Real-Time Systems 2.0 gives you the theory. Flashing FreeRTOS or Zephyr onto an STM32 turns coursework into something demonstrable.</p></td>
+          <td class="num">5<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">62</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:39%"></i></span>
+              <span class="impn">19</span></td>
+        </tr><tr>
+          <td class="rank">8</td>
+          <td class="skill"><b>Software architecture</b>
+              <span class="grp">Software engineering practice</span></td>
+          <td class="num">6<span class="sub">of 96</span></td>
+          <td class="num">3<span class="sub">of 31</span></td>
+          <td class="num">63</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:38%"></i></span>
+              <span class="impn">19</span></td>
+        </tr><tr>
+          <td class="rank">9</td>
+          <td class="skill"><b>Configuration management</b>
+              <span class="grp">Safety, standards &amp; process</span></td>
+          <td class="num">4<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:37%"></i></span>
+              <span class="impn">18</span></td>
+        </tr><tr>
+          <td class="rank">10</td>
+          <td class="skill"><b>SQL</b>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">7<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">50</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:36%"></i></span>
+              <span class="impn">18</span></td>
+        </tr><tr>
+          <td class="rank">11</td>
+          <td class="skill"><b>Kalman / estimation</b><span class="flag">one employer</span>
+              <span class="grp">Control, GNC &amp; estimation</span><p class="note">Optimal Control and System Identification cover the theory; no shipped estimator</p></td>
+          <td class="num">5<span class="sub">of 96</span></td>
+          <td class="num">1<span class="sub">of 31</span></td>
+          <td class="num">71</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:35%"></i></span>
+              <span class="impn">18</span></td>
+        </tr><tr>
+          <td class="rank">12</td>
+          <td class="skill"><b>Test automation</b><span class="flag">one employer</span>
+              <span class="grp">Modelling, simulation &amp; test</span><p class="note">V-Model test harnesses in the semester thesis; no automated regression suite in production</p><p class="action"><b>Do this:</b> Extend your V-Model thesis work with pytest and a CI runner — this and CI/CD are the same weekend&#x27;s work.</p></td>
+          <td class="num">5<span class="sub">of 96</span></td>
+          <td class="num">3<span class="sub">of 31</span></td>
+          <td class="num">57</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:34%"></i></span>
+              <span class="impn">17</span></td>
+        </tr><tr>
+          <td class="rank">13</td>
+          <td class="skill"><b>Linux (embedded)</b>
+              <span class="grp">Embedded &amp; real-time</span></td>
+          <td class="num">4<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">52</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:33%"></i></span>
+              <span class="impn">17</span></td>
+        </tr><tr>
+          <td class="rank">14</td>
+          <td class="skill"><b>Requirements / MBSE</b><span class="flag">one employer</span>
+              <span class="grp">Safety, standards &amp; process</span><p class="note">V-Model exposure in the semester thesis; no DOORS or SysML tooling</p><p class="action"><b>Do this:</b> Named at the primes (Airbus, Leonardo). Learn the DOORS/SysML vocabulary; tool access is usually given on the job.</p></td>
+          <td class="num">5<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:33%"></i></span>
+              <span class="impn">17</span></td>
+        </tr><tr>
+          <td class="rank">15</td>
+          <td class="skill"><b>SCADA / HMI</b>
+              <span class="grp">Industrial automation</span></td>
+          <td class="num">2<span class="sub">of 96</span></td>
+          <td class="num">2<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:30%"></i></span>
+              <span class="impn">15</span></td>
+        </tr><tr>
+          <td class="rank">16</td>
+          <td class="skill"><b>Bash/scripting</b>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">1<span class="sub">of 96</span></td>
+          <td class="num">1<span class="sub">of 31</span></td>
+          <td class="num">38</td>
+          <td class="imp"><span class="bar"><i class="l-partial" style="width:18%"></i></span>
+              <span class="impn">9</span></td>
+        </tr></tbody></table>
+
+<h2>4. Strengths to lead with</h2>
+<p>Confirmed in your CV and transcripts, and asked for by these roles. Put these
+first in your cover letters &mdash; they are why you rank where you do.</p>
+<table>
+          <thead><tr>
+            <th></th><th>Skill</th><th class="num">Jobs</th>
+            <th class="num">Employers</th><th class="num">Avg fit</th>
+            <th>Importance</th>
+          </tr></thead><tbody><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Embedded development</b>
+              <span class="grp">Embedded &amp; real-time</span></td>
+          <td class="num">31<span class="sub">of 96</span></td>
+          <td class="num">20<span class="sub">of 31</span></td>
+          <td class="num">55</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:96%"></i></span>
+              <span class="impn">48</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>C</b>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">40<span class="sub">of 96</span></td>
+          <td class="num">13<span class="sub">of 31</span></td>
+          <td class="num">61</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:91%"></i></span>
+              <span class="impn">46</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Python</b>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">40<span class="sub">of 96</span></td>
+          <td class="num">9<span class="sub">of 31</span></td>
+          <td class="num">64</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:83%"></i></span>
+              <span class="impn">42</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>GNC</b>
+              <span class="grp">Control, GNC &amp; estimation</span></td>
+          <td class="num">20<span class="sub">of 96</span></td>
+          <td class="num">8<span class="sub">of 31</span></td>
+          <td class="num">68</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:64%"></i></span>
+              <span class="impn">32</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>HIL / SIL testing</b>
+              <span class="grp">Modelling, simulation &amp; test</span></td>
+          <td class="num">20<span class="sub">of 96</span></td>
+          <td class="num">5<span class="sub">of 31</span></td>
+          <td class="num">65</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:56%"></i></span>
+              <span class="impn">28</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Git</b>
+              <span class="grp">Software engineering practice</span></td>
+          <td class="num">11<span class="sub">of 96</span></td>
+          <td class="num">6<span class="sub">of 31</span></td>
+          <td class="num">74</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:53%"></i></span>
+              <span class="impn">27</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>MATLAB</b>
+              <span class="grp">Languages &amp; programming</span></td>
+          <td class="num">12<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">78</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:52%"></i></span>
+              <span class="impn">26</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Simulink / MBD</b>
+              <span class="grp">Modelling, simulation &amp; test</span></td>
+          <td class="num">10<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">82</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:51%"></i></span>
+              <span class="impn">26</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Control design</b>
+              <span class="grp">Control, GNC &amp; estimation</span></td>
+          <td class="num">8<span class="sub">of 96</span></td>
+          <td class="num">7<span class="sub">of 31</span></td>
+          <td class="num">62</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:48%"></i></span>
+              <span class="impn">24</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>PLC programming</b>
+              <span class="grp">Industrial automation</span></td>
+          <td class="num">6<span class="sub">of 96</span></td>
+          <td class="num">6<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:43%"></i></span>
+              <span class="impn">22</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Instrumentation</b><span class="flag">one employer</span>
+              <span class="grp">Industrial automation</span></td>
+          <td class="num">10<span class="sub">of 96</span></td>
+          <td class="num">4<span class="sub">of 31</span></td>
+          <td class="num">60</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:42%"></i></span>
+              <span class="impn">21</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>ROS (general)</b>
+              <span class="grp">Robotics &amp; autonomy</span></td>
+          <td class="num">7<span class="sub">of 96</span></td>
+          <td class="num">5<span class="sub">of 31</span></td>
+          <td class="num">61</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:42%"></i></span>
+              <span class="impn">21</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Code generation</b>
+              <span class="grp">Modelling, simulation &amp; test</span></td>
+          <td class="num">1<span class="sub">of 96</span></td>
+          <td class="num">1<span class="sub">of 31</span></td>
+          <td class="num">97</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:42%"></i></span>
+              <span class="impn">21</span></td>
+        </tr><tr>
+          <td class="rank"></td>
+          <td class="skill"><b>Docker</b><span class="flag">one employer</span>
+              <span class="grp">Software engineering practice</span></td>
+          <td class="num">7<span class="sub">of 96</span></td>
+          <td class="num">3<span class="sub">of 31</span></td>
+          <td class="num">49</td>
+          <td class="imp"><span class="bar"><i class="l-have" style="width:33%"></i></span>
+              <span class="impn">17</span></td>
+        </tr></tbody></table>
+
+<h2>5. Eligibility and language &mdash; read before drawing conclusions</h2>
+<div class="callout">
+  <h3>Your German is not what is holding these roles back</h3>
+  <p><b>1 of 96</b> of these roles ask for fluent or C1 German. The Munich deep-tech and aerospace employers you rank well
+  against operate in English, and several say so explicitly. B1 is not the
+  barrier here that it is often assumed to be, and it should not stop you
+  applying to anything on your shortlist.</p>
+  <p><b>The honest caveat:</b> that result partly reflects what this tool can
+  see. Employers with public job-board APIs skew toward English-speaking
+  scale-ups; the Mittelstand and public-sector employers who do require German
+  are largely invisible to it. So read this as &ldquo;German is not gating the
+  roles on your list&rdquo;, not as &ldquo;German does not matter in Munich&rdquo;.
+  Improving it still widens the market beyond what this document covers.</p>
+</div>
+
+<div class="callout">
+  <h3>The clearance clause at Isar Aerospace</h3>
+  <p>Isar Aerospace attaches the same sentence to every posting: &ldquo;Due to
+  security clearance requirements, affiliations with countries listed under
+  &sect;&nbsp;13 para. 1 no. 17 S&Uuml;G may affect the application process.&rdquo;
+  S&Uuml;G is the German Security Clearance Act. The list of states it refers to
+  is maintained by the Federal Ministry of the Interior and is <b>not public</b>,
+  so nothing here tells you whether it applies to you.</p>
+  <p>Two things follow. First, the same adverts state plainly that all qualified
+  applicants are encouraged to apply, and they do not prioritise nationality.
+  Second, this is a question for Isar's recruiters, not for guesswork &mdash; ask
+  them directly rather than withdrawing on an assumption. You have already
+  applied to several of their roles, which is the right move.</p>
+  <p>Airbus differs: its Munich-area adverts require suitability for an
+  <i>erweiterte Sicherheits&uuml;berpr&uuml;fung</i> and very good written and
+  spoken German. Those are stated conditions rather than ambiguous ones.</p>
+</div>
+
+<p class="method" style="margin-top:3mm;"><b>Mentioned too rarely to prioritise:</b>
+EU/German citizenship (1), AUTOSAR (3), FPGA / HDL (4), MISRA / static analysis (1), German (fluent) (1) &mdash; named by fewer than five roles each, which is too thin an evidence
+base to act on.</p>
+
+<h2>6. How this was measured</h2>
+<ul class="method">
+  <li><b>Document frequency, not word frequency.</b> A posting naming Python
+  nine times counts once. Raw word counts would have made recruiting boilerplate
+  the top &ldquo;skill&rdquo; in this analysis.</li>
+  <li><b>Employer reach is tracked separately.</b> Helsing alone writes roughly
+  40% of the best-fit postings, so its house requirements &mdash; Rust,
+  reinforcement learning, distributed systems &mdash; would otherwise read as
+  market-wide demand. Section 2 exists to separate the two.</li>
+  <li><b>Importance</b> = 45% share of roles + 35% share of employers + 20% average
+  fit of the roles asking. A skill demanded by your strongest matches outranks a
+  commoner one demanded by weak matches.</li>
+  <li><b>Levels are judgements, not measurements.</b> They come from your CV, the
+  TUM Leistungsnachweis and the METU transcript. Edit
+  <code>skills_taxonomy.yaml</code> and re-run
+  <code>python3 run.py skills</code> as they change.</li>
+  <li><b>Limits.</b> Only employers with a public job-board API are covered, and a
+  skill absent from an advert is not always absent from the job.</li>
+</ul>
+</body></html>

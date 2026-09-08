@@ -1,0 +1,109 @@
+evidence:
+  control:
+    en: At Roketsan I designed PID and robust controllers for a high-precision missile seeker gimbal, validating them in MATLAB/Simulink before hardware deployment; my ongoing TUM master's thesis extends this into fault-tolerant control of propulsive spacecraft, where I simulate fault scenarios and evaluate their effect on path planning.
+    de: Bei Roketsan habe ich PID- und robuste Regler für ein hochpräzises Suchkopf-Gimbal ausgelegt und in MATLAB/Simulink vor dem Hardware-Einsatz validiert. Meine laufende Masterarbeit an der TUM erweitert dies auf fehlertolerante Regelung von Raumfahrtantrieben.
+  simulation:
+    en: 'I work model-based end to end: dynamic modelling in MATLAB/Simulink, Embedded Coder code generation onto Xilinx targets, and validation through xPC Target and Hardware-in-the-Loop testing. In my semester thesis at the Institute of Flight System Dynamics I extended an automated signal-integrity toolbox using MATLAB OOP and V-Model-based test harnesses.'
+    de: 'Ich arbeite durchgängig modellbasiert: dynamische Modellierung in MATLAB/Simulink, Codegenerierung mit Embedded Coder auf Xilinx-Zielplattformen sowie Validierung über xPC Target und Hardware-in-the-Loop-Tests. In meiner Semesterarbeit am Lehrstuhl für Flugsystemdynamik habe ich eine automatisierte Signal-Integritäts-Toolbox mit MATLAB-OOP und V-Modell-Testharnesses erweitert.'
+  embedded:
+    en: My embedded work spans generating Embedded C from Simulink models and deploying it onto Xilinx platforms, alongside formal coursework in Advanced Programming/C++ (1.7) and Real-Time Systems (2.0) at TUM.
+    de: Meine Embedded-Erfahrung reicht von der Generierung von Embedded C aus Simulink-Modellen bis zum Deployment auf Xilinx-Plattformen, ergänzt durch die TUM-Module Advanced Programming/C++ (1,7) und Real-Time Systems (2,0).
+  automation:
+    en: As a working student at Phlair I built TwinCAT 3.1 Structured Text logic for an absorber testbench, calibrated RS-485 industrial sensors, wired them to Beckhoff I/O terminals from circuit diagrams, and streamed PLC data into InfluxDB via PyADS with Grafana dashboards on top.
+    de: Als Werkstudent bei Phlair habe ich TwinCAT-3.1-Logik (Structured Text) für einen Absorber-Teststand entwickelt, RS-485-Industriesensoren kalibriert, sie anhand von Schaltplänen an Beckhoff-Klemmen verdrahtet und PLC-Daten über PyADS in InfluxDB mit Grafana-Dashboards überführt.
+  robotics:
+    en: I completed TUM's Introduction to ROS with a 1.0 and the Cyber-Physical Systems Lab for Autonomous Applications (1.9), and my minor in Mechatronics at METU covered robotics and embedded systems development.
+    de: Ich habe das TUM-Modul Introduction to ROS mit 1,0 sowie das Cyber-Physical Systems Lab – Autonomous Applications (1,9) abgeschlossen; mein Nebenfach Mechatronik an der METU umfasste Robotik und Embedded-Systems-Entwicklung.
+  aerospace:
+    en: My M.Sc. in Aerospace at TUM is built around GNC and flight dynamics — Advanced Control (2.0), Nonlinear Control (2.0), Optimal Control (2.3) and the Flight Control System Lab (1.7) — following two years of applied defence-industry control work.
+    de: Mein M.Sc. Aerospace an der TUM ist auf GNC und Flugdynamik ausgerichtet – Advanced Control (2,0), Nonlinear Control (2,0), Optimal Control (2,3) und Flight Control System Lab (1,7) – nach zwei Jahren angewandter Regelungstechnik in der Verteidigungsindustrie.
+  software:
+    en: On the software side I use Python (NumPy, SciPy, PyADS) and C++ daily, with Git, Docker, Proxmox and Linux networking used to deploy the database and monitoring stack behind our test bench.
+    de: Softwareseitig arbeite ich täglich mit Python (NumPy, SciPy, PyADS) und C++ sowie mit Git, Docker, Proxmox und Linux-Netzwerken, mit denen ich den Datenbank- und Monitoring-Stack unseres Teststands aufgesetzt habe.
+templates:
+  en: '{date}
+
+
+    Application: {title}
+
+    {company}{ref}
+
+
+    Dear Hiring Team,
+
+
+    I am applying for the position of {title} at {company}. I am completing my M.Sc. in Aerospace Engineering at TU Munich, and the role''s focus on {focus} lines up closely with both my academic direction and my hands-on engineering experience.
+
+
+    {evidence}
+
+
+    What draws me to {company} specifically is the chance to apply this control- and systems-engineering background to real hardware rather than to models alone. I am based in Munich, available for a full-time start, and work comfortably in English with German at {german_level} and improving.
+
+
+    I would welcome the opportunity to discuss how I can contribute to your team.
+
+
+    Kind regards,
+
+    {full_name}
+
+    {phone} | {email}
+
+    {address}
+
+    '
+  de: '{date}
+
+
+    Bewerbung als {title}
+
+    {company}{ref}
+
+
+    Sehr geehrtes Recruiting-Team,
+
+
+    hiermit bewerbe ich mich auf die Position als {title} bei {company}. Ich schließe derzeit meinen M.Sc. in Aerospace Engineering an der TU München ab, und der Schwerpunkt der Stelle auf {focus} passt sehr gut zu meiner fachlichen Ausrichtung und meiner praktischen Erfahrung.
+
+
+    {evidence}
+
+
+    Besonders reizt mich an {company} die Möglichkeit, diesen regelungs- und systemtechnischen Hintergrund an realer Hardware einzusetzen. Ich wohne in München, stehe für einen Vollzeiteinstieg zur Verfügung und arbeite sicher auf Englisch; meine Deutschkenntnisse liegen bei {german_level} und verbessern sich stetig.
+
+
+    Über die Gelegenheit zu einem persönlichen Gespräch würde ich mich sehr freuen.
+
+
+    Mit freundlichen Grüßen
+
+    {full_name}
+
+    {phone} | {email}
+
+    {address}
+
+    '
+focus_names:
+  control:
+    en: control systems and GNC
+    de: Regelungstechnik und GNC
+  simulation:
+    en: model-based design and simulation
+    de: modellbasierte Entwicklung und Simulation
+  embedded:
+    en: embedded and real-time software
+    de: Embedded- und Echtzeitsoftware
+  automation:
+    en: industrial automation and test systems
+    de: Industrieautomatisierung und Teststandstechnik
+  robotics:
+    en: robotics and autonomous systems
+    de: Robotik und autonome Systeme
+  aerospace:
+    en: aerospace systems
+    de: Luft- und Raumfahrtsysteme
+  software:
+    en: engineering software development
+    de: Softwareentwicklung im Engineering

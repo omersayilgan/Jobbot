@@ -1,0 +1,279 @@
+<title>Munich Engineering Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+
+*{box-sizing:border-box}
+:root{
+  --ground:#F2F5F8; --surface:#FFFFFF; --surface-2:#E8EDF3;
+  --ink:#0F1720; --ink-2:#46556A; --ink-3:#74849A;
+  --rule:#D9E0EA; --rule-2:#C2CCDA;
+  --accent:#14508C; --accent-soft:#E1EAF6;
+  --g0:#0F6A45; --g0bg:#DFEFE7;
+  --g1:#14508C; --g1bg:#E1EAF6;
+  --g2:#8A5711; --g2bg:#F5ECDA;
+  --g3:#5A6472; --g3bg:#E7EBF0;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B1015; --surface:#131A22; --surface-2:#1A232D;
+    --ink:#E7EDF4; --ink-2:#A1AEBF; --ink-3:#73828F;
+    --rule:#25303E; --rule-2:#32404E;
+    --accent:#6DA7E3; --accent-soft:#152840;
+    --g0:#5CC894; --g0bg:#0E2B1F;
+    --g1:#6DA7E3; --g1bg:#12253A;
+    --g2:#D9A957; --g2bg:#2C2413;
+    --g3:#8593A3; --g3bg:#1D262F;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B1015; --surface:#131A22; --surface-2:#1A232D;
+  --ink:#E7EDF4; --ink-2:#A1AEBF; --ink-3:#73828F;
+  --rule:#25303E; --rule-2:#32404E;
+  --accent:#6DA7E3; --accent-soft:#152840;
+  --g0:#5CC894; --g0bg:#0E2B1F;
+  --g1:#6DA7E3; --g1bg:#12253A;
+  --g2:#D9A957; --g2bg:#2C2413;
+  --g3:#8593A3; --g3bg:#1D262F;
+}
+
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+  font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+
+header{border-bottom:1px solid var(--rule); background:var(--surface)}
+.head{padding:44px 0 34px; display:flex; flex-direction:column; gap:18px}
+h1{
+  font-family:Archivo,ui-sans-serif,sans-serif; font-weight:700;
+  font-size:clamp(28px,4.2vw,42px); line-height:1.08; letter-spacing:-.022em;
+  margin:0; text-wrap:balance;
+}
+.lede{margin:0; max-width:62ch; color:var(--ink-2); font-size:17px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin:0;
+}
+.figures{display:flex; flex-wrap:wrap; gap:28px; margin-top:4px}
+.fig{display:flex; flex-direction:column; gap:2px}
+.fig b{
+  font-family:"IBM Plex Mono",monospace; font-size:24px; font-weight:600;
+  color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.1;
+}
+.fig span{font-size:12.5px; color:var(--ink-3)}
+
+.controls{
+  position:sticky; top:0; z-index:20; background:var(--surface);
+  border-bottom:1px solid var(--rule); padding:12px 0;
+}
+.controls .wrap{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+input[type=search],select{
+  font:inherit; font-size:14px; padding:8px 12px; border-radius:7px;
+  border:1px solid var(--rule-2); background:var(--ground); color:var(--ink);
+}
+input[type=search]{flex:1; min-width:200px}
+input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px;
+}
+.count{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-3)}
+
+section.tier{padding:38px 0 4px}
+.tier-head{display:flex; flex-direction:column; gap:5px; margin-bottom:16px}
+.tier-head h2{
+  font-family:Archivo,sans-serif; font-weight:600; font-size:20px;
+  letter-spacing:-.01em; margin:0; display:flex; align-items:center; gap:11px;
+}
+.pill{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+  padding:3px 9px; border-radius:999px; letter-spacing:.04em;
+}
+.tier-head p{margin:0; color:var(--ink-2); font-size:14.5px; max-width:70ch}
+
+.rows{display:flex; flex-direction:column; gap:8px}
+.row{
+  background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+  padding:14px 16px; display:grid; grid-template-columns:54px 1fr; gap:14px;
+  align-items:start;
+}
+.row:hover{border-color:var(--rule-2)}
+.score{display:flex; flex-direction:column; align-items:center; gap:5px}
+.score b{
+  font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:600;
+  font-variant-numeric:tabular-nums; line-height:1;
+}
+.meter{width:44px; height:3px; border-radius:2px; background:var(--surface-2); overflow:hidden}
+.meter i{display:block; height:100%; border-radius:2px}
+.main{min-width:0}
+.title{
+  font-family:Archivo,sans-serif; font-weight:600; font-size:16px;
+  letter-spacing:-.005em; margin:0 0 3px; text-wrap:balance;
+}
+.title a{color:var(--ink); text-decoration:none}
+.title a:hover{color:var(--accent); text-decoration:underline; text-underline-offset:3px}
+.meta{
+  font-size:13.5px; color:var(--ink-3); display:flex; flex-wrap:wrap;
+  gap:5px 9px; align-items:baseline;
+}
+.meta b{color:var(--ink-2); font-weight:600}
+.chips{display:flex; flex-wrap:wrap; gap:5px; margin-top:9px}
+.chip{
+  font-size:11.5px; padding:2.5px 8px; border-radius:5px;
+  background:var(--surface-2); color:var(--ink-2);
+}
+.chip u{
+  text-decoration:none; font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px; color:var(--ink-3); text-transform:uppercase;
+  letter-spacing:.05em; margin-right:5px;
+}
+details{margin-top:9px}
+summary{
+  cursor:pointer; font-size:13px; color:var(--ink-3);
+  font-family:"IBM Plex Mono",monospace; letter-spacing:.02em;
+}
+summary::marker{color:var(--rule-2)}
+details ul{margin:8px 0 0; padding-left:18px; font-size:13.5px; color:var(--ink-2)}
+details li{margin:2px 0}
+.row.done{opacity:.62}
+.row.done .title a{text-decoration:line-through; text-decoration-thickness:1px}
+.state{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+  text-transform:uppercase; letter-spacing:.06em; padding:2px 7px;
+  border-radius:5px; background:var(--surface-2); color:var(--ink-2);
+  margin-left:8px; vertical-align:2px;
+}
+.empty{padding:60px 0; text-align:center; color:var(--ink-3)}
+
+footer{
+  margin-top:56px; border-top:1px solid var(--rule); background:var(--surface);
+  padding:30px 0 46px; color:var(--ink-3); font-size:13.5px;
+}
+footer p{margin:0 0 8px; max-width:74ch}
+footer code{
+  font-family:"IBM Plex Mono",monospace; font-size:12.5px;
+  background:var(--surface-2); padding:1.5px 6px; border-radius:4px; color:var(--ink-2);
+}
+@media (max-width:640px){
+  .row{grid-template-columns:44px 1fr; gap:11px}
+  .head{padding:32px 0 26px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+</style>
+
+<header>
+  <div class="wrap head">
+    <p class="eyebrow">Ranked against cv.pdf, the TUM Leistungsnachweis and the METU transcript &middot; __DATE__</p>
+    <h1>Munich engineering roles, ranked by how well they fit you</h1>
+    <p class="lede">Every full-time engineering post currently open in the Munich
+      commuting area across __COMPANIES__ employers whose job boards expose a public API.
+      Ordered most relevant to least, so you can work down the list from the top.</p>
+    <div class="figures">
+      <div class="fig"><b>__TRACKED__</b><span>Munich full-time posts</span></div>
+      <div class="fig"><b>__COUNT__</b><span>still open to you</span></div>
+      <div class="fig"><b>__DONE__</b><span>applied or closed</span></div>
+      <div class="fig"><b>__COMPANIES__</b><span>employers</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <input type="search" id="q" placeholder="Filter by title, company or skill (e.g. control, C++, Isar)" aria-label="Filter roles">
+    <select id="tierSel" aria-label="Filter by tier"><option value="">All tiers</option></select>
+    <select id="compSel" aria-label="Filter by employer"><option value="">All employers</option></select>
+    <select id="doneSel" aria-label="Filter by status">
+      <option value="open">Not yet actioned</option>
+      <option value="done">Applied / closed</option>
+      <option value="">Everything</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<main class="wrap" id="out"></main>
+
+<footer>
+  <div class="wrap">
+    <p><b>How the score works.</b> Points come from four signals: the role's title
+      family, which of your CV skill clusters the posting asks for, seniority fit
+      (entry-level up, "Principal" and "10+ years" down), and your transcript &mdash;
+      modules you scored well in (ROS 1.0, Flight Control Lab 1.7, C++ 1.7,
+      Advanced &amp; Nonlinear Control 2.0, Real-Time Systems 2.0) push a role up,
+      while thermo-fluids, propulsion, structures and RF/analog subjects push it
+      down. Postings demanding C1 German are discounted rather than hidden.</p>
+    <p><b>Regenerate this page</b> after a fresh pull with
+      <code>python3 run.py fetch &amp;&amp; python3 run.py report</code>. Build a ready-to-send
+      application pack for any role with <code>python3 run.py pack &lt;uid&gt;</code>.</p>
+    <p>Sources: Greenhouse, Ashby, Personio, Lever and Recruitee public job-board APIs.
+      Employers hiring only through Workday or SAP SuccessFactors (Airbus, MTU, Siemens,
+      Rohde &amp; Schwarz) are not covered here &mdash; check those career pages directly.</p>
+  </div>
+</footer>
+
+<script>
+const JOBS = __DATA__;
+const TIERS = __TIERS__;
+const out = document.getElementById('out');
+const q = document.getElementById('q');
+const tierSel = document.getElementById('tierSel');
+const compSel = document.getElementById('compSel');
+const doneSel = document.getElementById('doneSel');
+const countEl = document.getElementById('count');
+
+TIERS.forEach((t,i)=>tierSel.add(new Option(t.name, i)));
+[...new Set(JOBS.map(j=>j.c))].sort().forEach(c=>compSel.add(new Option(c,c)));
+
+const esc = s => String(s).replace(/[&<>"']/g, m =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+function row(j){
+  const chips = Object.entries(j.m).map(([k,v]) =>
+    `<span class="chip"><u>${esc(k)}</u>${esc(v.join(', '))}</span>`).join('');
+  const why = j.w.map(w=>`<li>${esc(w)}</li>`).join('');
+  const g = 'g' + j.tier;
+  return `<article class="row${j.done?' done':''}">
+    <div class="score">
+      <b style="color:var(--${g})">${j.s}</b>
+      <span class="meter"><i style="width:${j.s}%;background:var(--${g})"></i></span>
+    </div>
+    <div class="main">
+      <h3 class="title"><a href="${esc(j.u)}" target="_blank" rel="noopener">${esc(j.t)}</a>${
+        j.done?`<span class="state">${esc(j.st)}</span>`:''}</h3>
+      <div class="meta"><b>${esc(j.c)}</b><span>&middot;</span><span>${esc(j.l)}</span>
+        ${j.d?`<span>&middot;</span><span>posted ${esc(j.d)}</span>`:''}
+</div>
+      <div class="chips">${chips}</div>
+      ${why?`<details><summary>Why it ranked here</summary><ul>${why}</ul></details>`:''}
+    </div></article>`;
+}
+
+function render(){
+  const term = q.value.trim().toLowerCase();
+  const tf = tierSel.value, cf = compSel.value, df = doneSel.value;
+  let shown = 0, html = '';
+
+  TIERS.forEach((t,i)=>{
+    if(tf !== '' && String(i) !== tf) return;
+    const list = JOBS.filter(j => j.tier===i
+      && (df === '' || (df === 'done' ? j.done : !j.done))
+      && (!cf || j.c===cf)
+      && (!term || (j.t+' '+j.c+' '+j.l+' '+Object.values(j.m).flat().join(' ')).toLowerCase().includes(term)));
+    if(!list.length) return;
+    shown += list.length;
+    html += `<section class="tier"><div class="tier-head">
+        <h2>${esc(t.name)}<span class="pill" style="background:var(--g${i}bg);color:var(--g${i})">${list.length} role${list.length!==1?'s':''} &middot; ${t.floor}+</span></h2>
+        <p>${esc(t.blurb)}</p></div>
+      <div class="rows">${list.map(row).join('')}</div></section>`;
+  });
+
+  out.innerHTML = html || '<p class="empty">Nothing left in this view — switch the status filter to see applied and closed roles.</p>';
+  const pool = JOBS.filter(j => df === '' || (df === 'done' ? j.done : !j.done)).length;
+  countEl.textContent = shown + ' of ' + pool + ' shown';
+}
+[q,tierSel,compSel,doneSel].forEach(el=>el.addEventListener('input',render));
+render();
+</script>

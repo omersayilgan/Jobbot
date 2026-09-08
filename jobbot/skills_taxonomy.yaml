@@ -1,0 +1,91 @@
+# ============================================================
+#  Skill taxonomy for the gap analysis.
+#
+#  level:  have    — solid evidence in CV, transcript or work history
+#          partial — adjacent or academic exposure, not production depth
+#          gap     — no evidence
+#
+#  Edit `level` as you learn things; re-run `python3 run.py skills`.
+# ============================================================
+
+groups:
+  Languages & programming:
+    C++:            {level: partial, terms: ["c++", "cpp", "modern c++", "c++17", "c++20"],
+                     note: "Advanced Programming 1.7 and Simulink-generated code — but no large hand-written C++ codebase"}
+    C:              {level: have, terms: ["embedded c", " c ", "c programming"]}
+    Python:         {level: have, terms: [python, numpy, scipy, pandas]}
+    MATLAB:         {level: have, terms: [matlab, "matlab/simulink"]}
+    Rust:           {level: gap, terms: [rust, rustlang]}
+    Go:             {level: gap, terms: [golang, " go "]}
+    Bash/scripting: {level: partial, terms: [bash, shell scripting, powershell]}
+    SQL:            {level: partial, terms: [sql, postgres, postgresql, database]}
+
+  Control, GNC & estimation:
+    Control design:      {level: have, terms: [control system, control design, pid, lqr, mpc, model predictive, robust control, nonlinear control, adaptive control, feedback control]}
+    GNC:                 {level: have, terms: [gnc, guidance navigation, flight control, attitude control, adcs, aocs]}
+    Kalman / estimation: {level: partial, terms: [kalman, state estimation, sensor fusion, ekf, ukf, particle filter],
+                          note: "Optimal Control and System Identification cover the theory; no shipped estimator"}
+    System identification: {level: have, terms: [system identification, parameter estimation]}
+    Trajectory/path planning: {level: have, terms: [path planning, trajectory planning, motion planning, guidance law]}
+    Orbital mechanics:   {level: partial, terms: [orbital mechanics, astrodynamics, orbit determination, mission analysis]}
+
+  Modelling, simulation & test:
+    Simulink / MBD:      {level: have, terms: [simulink, model-based design, model based design, mbd]}
+    Code generation:     {level: have, terms: [embedded coder, code generation, autocoding, targetlink]}
+    HIL / SIL testing:   {level: have, terms: [hardware-in-the-loop, hardware in the loop, hil, software-in-the-loop, sil, xpc target, dspace]}
+    Simulation frameworks: {level: partial, terms: [gazebo, isaac sim, mujoco, carla, simulation framework, digital twin]}
+    Test automation:     {level: partial, terms: [test automation, pytest, unit test, integration test, googletest, ci testing],
+                          note: "V-Model test harnesses in the semester thesis; no automated regression suite in production"}
+    Verification & validation: {level: partial, terms: ["v&v", verification and validation, qualification testing, acceptance test]}
+
+  Embedded & real-time:
+    Embedded development: {level: have, terms: [embedded software, embedded systems, firmware, microcontroller, bare-metal]}
+    RTOS:                 {level: partial, terms: [rtos, freertos, zephyr, vxworks, real-time operating],
+                           note: "Echtzeitsysteme 2.0 is coursework; no RTOS shipped"}
+    Bus protocols:        {level: partial, terms: [can bus, canopen, spi, i2c, uart, ethercat, profinet, modbus, rs-485, rs485],
+                           note: "RS-485 and serial at Phlair; CAN is the common gap for automotive and space"}
+    FPGA / HDL:           {level: gap, terms: [fpga, vhdl, verilog, zynq, xilinx, quartus, vivado],
+                           note: "Deployed generated code onto Xilinx, but never wrote HDL"}
+    AUTOSAR:              {level: gap, terms: [autosar, classic platform, adaptive platform]}
+    Linux (embedded):     {level: partial, terms: [embedded linux, yocto, buildroot, device driver, kernel]}
+
+  Robotics & autonomy:
+    ROS 2:            {level: partial, terms: [ros2, "ros 2"],
+                       note: "Graded 1.0 in Introduction to ROS — but industry has moved to ROS 2"}
+    ROS (general):    {level: have, terms: [ros, robot operating system]}
+    Perception / CV:  {level: gap, terms: [computer vision, perception, opencv, point cloud, lidar processing, slam, visual odometry]}
+    Machine learning: {level: gap, terms: [machine learning, deep learning, pytorch, tensorflow, neural network]}
+    Reinforcement learning: {level: gap, terms: [reinforcement learning, "rl "]}
+
+  Software engineering practice:
+    Git:               {level: have, terms: [git, version control]}
+    CI/CD:             {level: gap, terms: ["ci/cd", continuous integration, jenkins, gitlab ci, github actions, build pipeline]}
+    Docker:            {level: have, terms: [docker, container]}
+    Kubernetes/cloud:  {level: gap, terms: [kubernetes, k8s, aws, azure, "gcp", cloud infrastructure, terraform]}
+    Distributed systems: {level: gap, terms: [distributed systems, microservices, message broker, grpc, zeromq, dds]}
+    Software architecture: {level: partial, terms: [software architecture, design patterns, api design]}
+    Agile / Scrum:     {level: partial, terms: [agile, scrum, kanban, sprint]}
+
+  Safety, standards & process:
+    Functional safety:  {level: gap, terms: [functional safety, iso 26262, iec 61508, safety-critical, safety critical, sil level]}
+    Aerospace standards: {level: gap, terms: ["do-178", "do-254", ecss, arp4754, easa, airworthiness]}
+    MISRA / static analysis: {level: gap, terms: [misra, polyspace, static analysis, coding standard, lint]}
+    Requirements / MBSE: {level: partial, terms: [requirements engineering, doors, sysml, mbse, capella, requirements management],
+                          note: "V-Model exposure in the semester thesis; no DOORS or SysML tooling"}
+    Configuration management: {level: partial, terms: [configuration management, change management, jira, alm]}
+
+  Industrial automation:
+    PLC programming:  {level: have, terms: [plc, twincat, beckhoff, structured text, "iec 61131", codesys, sps]}
+    SCADA / HMI:      {level: partial, terms: [scada, hmi, visualisation, wincc]}
+    Instrumentation:  {level: have, terms: [sensor integration, instrumentation, calibration, test bench, prüfstand]}
+
+  Eligibility & language:
+    German (fluent):      {level: gap, terms: [fließend deutsch, verhandlungssicher, "deutsch c1", "german c1", "c1 german",
+                                                sehr gute deutschkenntnisse, muttersprache, fluent german, "fluent in german",
+                                                "business level german", "proficient in german", "german is required",
+                                                gute deutschkenntnisse],
+                           note: "You are B1 — but see the finding below: only one of these 96 roles actually requires fluent German."}
+    Security clearance:   {level: gap, terms: [security clearance, sicherheitsüberprüfung, "ü2", "nato secret", clearance required, verschlusssache],
+                           note: "Requires German residency history; generally closed to non-EU nationals early on."}
+    EU/German citizenship: {level: gap, terms: [eu citizenship, german citizenship, eu national, staatsangehörigkeit, export control, itar, dual-use],
+                           note: "A hard gate at defence primes, not something preparation can fix."}

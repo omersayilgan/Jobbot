@@ -1,0 +1,136 @@
+# Company registry — every entry probed live and confirmed.
+# Aggregator sources use a single pseudo-entry; their queries live in config.yaml.
+# Grow it with:  python3 run.py discover --url <careers page>
+
+greenhouse:
+- slug: helsing
+  name: Helsing
+- slug: isaraerospace
+  name: Isar Aerospace
+- slug: alpineeagle
+  name: Alpine Eagle
+- slug: kinexon
+  name: KINEXON
+- slug: celonis
+  name: Celonis
+- slug: navvis
+  name: NavVis
+- slug: konux
+  name: KONUX
+- slug: marvelfusion
+  name: Marvel Fusion
+- slug: parloa
+  name: Parloa
+- slug: flix
+  name: Flix
+- slug: vay
+  name: Vay
+- slug: commercetools
+  name: commercetools
+- slug: staffbase
+  name: Staffbase
+- slug: raisin
+  name: Raisin
+- slug: getyourguide
+  name: GetYourGuide
+- slug: rocketfactoryaugsburgag
+  name: Rocket Factory Augsburg
+ashby:
+- slug: proxima-fusion
+  name: Proxima Fusion
+- slug: orbem
+  name: Orbem
+- slug: luminovo
+  name: Luminovo
+- slug: robco
+  name: RobCo
+- slug: sereact
+  name: Sereact
+- slug: tacto
+  name: Tacto
+- slug: cosuno
+  name: Cosuno
+- slug: workerbase
+  name: Workerbase
+- slug: egym
+  name: EGYM
+- slug: langdock
+  name: Langdock
+- slug: moss
+  name: Moss
+- slug: pliant
+  name: Pliant
+- slug: bunch
+  name: Bunch
+- slug: choco
+  name: Choco
+- slug: holidu
+  name: Holidu
+- slug: zenjob
+  name: Zenjob
+- slug: tourlane
+  name: Tourlane
+- slug: forto
+  name: Forto
+- slug: enpal
+  name: Enpal
+- slug: the-exploration-company
+  name: The Exploration Company
+personio:
+- slug: mynaric
+  name: Mynaric
+- slug: magazino
+  name: Magazino
+- slug: filics
+  name: Filics
+- slug: kiutra
+  name: kiutra
+- slug: iqm
+  name: IQM Quantum Computers
+- slug: blickfeld
+  name: Blickfeld
+- slug: proglove
+  name: ProGlove
+- slug: wandelbots
+  name: Wandelbots
+- slug: tanso
+  name: Tanso
+- slug: circus
+  name: Circus Group
+- slug: everphone
+  name: Everphone
+- slug: tozero
+  name: tozero
+- slug: vyoma-gmbh
+  name: Vyoma
+lever:
+- slug: finn
+  name: FINN
+- slug: apex-ai
+  name: Apex.AI
+recruitee:
+- slug: instagrid
+  name: instagrid
+- slug: adjust
+  name: Adjust
+smartrecruiters: []
+workable:
+- slug: agile-robots
+  name: Agile Robots
+workday:
+- slug: ag
+  site: Airbus
+  host: wd3
+  name: Airbus
+- slug: leonardocompany
+  site: LeonardoCareerSite
+  host: wd3
+  name: Leonardo / Telespazio
+adzuna:
+- slug: de
+  name: Adzuna DE
+arbeitnow:
+- slug: de
+  name: Arbeitnow
+jsearch: []
+jooble: []
