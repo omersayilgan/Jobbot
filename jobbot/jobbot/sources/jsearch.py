@@ -6,7 +6,7 @@ licenses and indexes the data; you query JSearch, never the sites themselves,
 so there is no terms-of-service breach and no account to get banned.
 
 Free tier is roughly 200 requests/month, so the adapter is deliberately frugal:
-one request per configured query, Munich-scoped.
+one request per configured query, scoped to the profile's city.
 
     jsearch:
       api_key: "..."          # rapidapi.com key
@@ -44,8 +44,10 @@ def probe(slug: str, cfg: dict) -> int | None:
     if not key:
         return None
     try:
-        r = requests.get(API, params={"query": "engineer munich", "page": "1",
-                                      "num_pages": "1", "country": "de"},
+        city = cfg.get("filters", {}).get("location_label", "")
+        country = (cfg.get("adzuna") or {}).get("country") or "de"
+        r = requests.get(API, params={"query": f"engineer {city}".strip(), "page": "1",
+                                      "num_pages": "1", "country": country},
                          headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": HOST},
                          timeout=cfg.get("fetch", {}).get("request_timeout", 20))
         if r.status_code == 200:

@@ -1,10 +1,12 @@
-"""Scores a posting against the CV profile defined in config.yaml.
+"""Scores a posting against the profile generated from your documents.
 
-Score is a 0-100 fit estimate built from four signals:
+Score is a 0-100 fit estimate built from five signals, all of them configured
+per person by setup.py rather than hardcoded here:
   1. title family  — what the role fundamentally is (largest single lever)
-  2. skill overlap — which of your CV's skill clusters the posting asks for
-  3. seniority     — early-career roles up, principal/head roles down
-  4. language      — C1-German postings down-weighted (you are B1)
+  2. skill overlap — which of your evidenced domains the posting asks for
+  3. seniority     — matched to your career stage, in both directions
+  4. transcript    — subjects you demonstrably did well and badly in
+  5. language      — a local-language requirement above your level costs points
 """
 from __future__ import annotations
 
@@ -26,11 +28,19 @@ FULLTIME_POS = ("full-time", "full time", "full_time", "vollzeit", "permanent",
 
 
 def _find(haystack: str, terms) -> list[str]:
-    """Whole-word-ish containment match; handles multi-word terms and umlauts."""
+    """Whole-word-ish containment match; handles multi-word terms and umlauts.
+
+    A term ending in `*` is a stem, matched as a prefix — German compounds
+    ("Aeroelastik", "Flugantriebe") swallow the trailing word boundary that a
+    plain term depends on.
+    """
     found = []
     for t in terms:
-        t = t.lower()
-        pattern = r"(?<![a-z0-9äöüß])" + re.escape(t) + r"(?![a-z0-9äöüß])"
+        t = str(t).lower()
+        if t.endswith("*"):
+            pattern = r"(?<![a-z0-9äöüß])" + re.escape(t[:-1])
+        else:
+            pattern = r"(?<![a-z0-9äöüß])" + re.escape(t) + r"(?![a-z0-9äöüß])"
         if re.search(pattern, haystack):
             found.append(t)
     return found
@@ -45,7 +55,13 @@ def passes_filters(job: Job, cfg: dict) -> tuple[bool, str]:
         if bad.lower() in title:
             return False, f"excluded title keyword: '{bad}'"
 
-    ok, note = classify(job.location, [a.lower() for a in f.get("locations", [])])
+    ok, note = classify(
+        job.location,
+        [a.lower() for a in f.get("locations", [])],
+        ambiguous=f.get("ambiguous_locations", []),
+        excludes=f.get("location_excludes", []),
+        remote_ok=f.get("remote_anchors", []),
+        label=f.get("location_label", "your area"))
     if not ok:
         return False, note
     job.reasons.append(f"Location: {note}")
@@ -120,12 +136,15 @@ def score(job: Job, cfg: dict) -> Job:
             job.reasons.append(f"Weaker on transcript: '{hit[0]}' ({pts})")
             break
 
-    # ---- 5. German requirement ------------------------------------------
+    # ---- 5. local-language requirement -----------------------------------
     for pts, terms in sorted(cfg["language"].get("penalty", {}).items(), key=lambda x: int(x[0])):
         hit = _find(body, terms)
         if hit:
             total += int(pts)
-            job.reasons.append(f"German requirement '{hit[0]}' ({pts}) — you are B1")
+            lang = cfg["language"].get("local_language", "the local language")
+            mine = cfg["language"].get("your_level", "your level")
+            job.reasons.append(
+                f"{lang} requirement '{hit[0]}' ({pts}) — you are {mine}")
             break
     for pts, terms in cfg["language"].get("boost", {}).items():
         if _find(body, terms):

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 import time
@@ -18,6 +19,7 @@ from .sources import ADAPTERS
 
 def cmd_fetch(args) -> int:
     cfg, registry = load_config(), load_companies()
+    place = cfg["filters"].get("location_label", "range")
     conn = db.connect()
     # Application history cannot be re-fetched — snapshot it before anything else.
     db.backup_statuses(conn)
@@ -54,7 +56,7 @@ def cmd_fetch(args) -> int:
 
         live_companies.update(j.company for j in raw)
         above = [j for j in kept if j.score >= cfg["filters"]["min_score"]]
-        print(f"  {name:22s} {len(raw):4d} posted → {len(kept):3d} in Munich/full-time "
+        print(f"  {name:22s} {len(raw):4d} posted → {len(kept):3d} in {place}/full-time "
               f"→ {len(above):3d} above score {cfg['filters']['min_score']}")
         all_jobs.extend(kept)
 
@@ -126,7 +128,9 @@ def cmd_pack(args) -> int:
         db.set_status(conn, row["uid"], "shortlisted")
         print(f"  {row['score']:>3}  {row['company']} — {row['title']}\n       {folder}")
         made += 1
-    print(f"\n{made} application pack(s) built in output/applications/")
+    from .config import output_dir
+    print(f"\n{made} application pack(s) built in "
+          f"{os.path.relpath(os.path.join(output_dir(), 'applications'), os.getcwd())}/")
     return 0 if made else 1
 
 
@@ -193,7 +197,11 @@ def cmd_dedupe(args) -> int:
 
 def cmd_skills(args) -> int:
     pdf, html_path = skillreport.build(args.min_fit, args.out)
-    print(f"Skills gap analysis written to:\n  {pdf}\n  {html_path}")
+    print(f"Skills gap analysis written to:\n  {html_path}")
+    if pdf:
+        print(f"  {pdf}")
+    else:
+        print("  (no PDF — install WeasyPrint for that: pip install weasyprint)")
     return 0
 
 
@@ -216,6 +224,38 @@ def cmd_stats(args) -> int:
     return 0
 
 
+def cmd_profile(args) -> int:
+    """Show, list or switch the active profile."""
+    from .config import PROFILES_DIR, active_profile, load_config, set_active
+    if args.use:
+        if not os.path.isdir(os.path.join(PROFILES_DIR, args.use)):
+            print(f"No profile '{args.use}'.")
+            return 1
+        set_active(args.use)
+        print(f"Active profile is now '{args.use}'.")
+        return 0
+
+    slug = active_profile()
+    if not slug:
+        print("No profile configured. Run:  python3 setup.py")
+        return 1
+    cfg = load_config()
+    p, f = cfg["profile"], cfg["filters"]
+    print(f"Active profile : {slug}")
+    print(f"Name           : {p['full_name']}")
+    print(f"Headline       : {p.get('headline', '')}")
+    print(f"Searching      : {f.get('location_label', '?')}")
+    print(f"Domains        : {', '.join(cfg['skills'])}")
+    print(f"Output         : output/{slug}/")
+    if os.path.isdir(PROFILES_DIR):
+        others = [d for d in sorted(os.listdir(PROFILES_DIR))
+                  if os.path.isdir(os.path.join(PROFILES_DIR, d)) and d != slug]
+        if others:
+            print(f"\nOther profiles : {', '.join(others)}")
+            print("Switch with    : python3 run.py profile --use <name>")
+    return 0
+
+
 def cmd_discover(args) -> int:
     if args.url:
         discover.from_url(args.url)
@@ -229,7 +269,7 @@ def cmd_discover(args) -> int:
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(
-        prog="run.py", description="Munich engineering job search automation")
+        prog="run.py", description="Job search automation, driven by your own CV")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     f = sub.add_parser("fetch", help="pull + score jobs from every company")
@@ -280,10 +320,19 @@ def main(argv=None) -> int:
 
     sub.add_parser("stats", help="pipeline summary").set_defaults(func=cmd_stats)
 
+    pr = sub.add_parser("profile", help="show or switch the active profile")
+    pr.add_argument("--use", help="make this profile active")
+    pr.set_defaults(func=cmd_profile)
+
     d = sub.add_parser("discover", help="find a company's ATS")
     d.add_argument("slug", nargs="?")
     d.add_argument("--url", help="fingerprint a careers page instead of guessing")
     d.set_defaults(func=cmd_discover)
 
     args = p.parse_args(argv)
-    return args.func(args)
+    from .config import ProfileError
+    try:
+        return args.func(args)
+    except ProfileError as exc:
+        print(f"\n{exc}\n")
+        return 1

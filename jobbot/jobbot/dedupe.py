@@ -24,9 +24,23 @@ GENDER_TAG = re.compile(
     r"[\(\[]\s*(?:[mwfdxa](?:\s*/\s*[mwfdx])+|all\s+genders|alle\s+geschlechter"
     r"|m\s*/\s*w\s*/\s*d)\s*[\)\]]", re.I)
 
-CITY_TAIL = re.compile(
-    r"\s*(?:[-–|,]\s*)?\b(?:in|bei|near|standort)?\s*"
-    r"(?:m(?:ü|ue)nchen|munich|ottobrunn|garching|taufkirchen|gilching)\s*$", re.I)
+# Repostings often append the city to the title. The place names come from the
+# active profile, so this works wherever the user lives.
+_CITY_TAIL_CACHE: dict = {}
+
+
+def _city_tail() -> re.Pattern:
+    if "re" not in _CITY_TAIL_CACHE:
+        try:
+            from .config import load_config
+            places = [re.escape(p) for p in load_config()["filters"]["locations"][:40] if p]
+        except Exception:
+            places = []
+        alt = "|".join(places) or r"(?!x)x"
+        _CITY_TAIL_CACHE["re"] = re.compile(
+            r"\s*(?:[-–|,]\s*)?\b(?:in|bei|near|standort)?\s*"
+            r"(?:" + alt + r")\s*$", re.I)
+    return _CITY_TAIL_CACHE["re"]
 
 TITLE_JACCARD = 0.85      # same company, near-identical title
 DESC_JACCARD = 0.75       # different company (agency fronting), same posting
@@ -41,7 +55,7 @@ def norm_company(text: str) -> str:
 
 def norm_title(text: str) -> str:
     t = GENDER_TAG.sub(" ", text or "")
-    t = CITY_TAIL.sub("", t)
+    t = _city_tail().sub("", t)
     return re.sub(r"[^a-z0-9]+", "", t.lower())
 
 

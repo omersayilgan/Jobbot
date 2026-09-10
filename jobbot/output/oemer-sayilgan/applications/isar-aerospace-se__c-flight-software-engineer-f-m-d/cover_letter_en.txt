@@ -1,0 +1,40 @@
+08 September 2026
+
+Application: C++ Flight Software Engineer (f/m/d)
+Isar Aerospace SE
+Ref: 4948831101
+
+Dear Hiring Team,
+
+I am applying for the position of C++ Flight Software Engineer (f/m/d) at Isar
+Aerospace SE. I am completing my M.Sc. in Aerospace Engineering at TU Munich,
+and the role's focus on control systems and GNC lines up closely with both my
+academic direction and my hands-on engineering experience.
+
+At Roketsan I designed PID and robust controllers for a high-precision missile
+seeker gimbal, validating them in MATLAB/Simulink before hardware deployment;
+my ongoing TUM master's thesis extends this into fault-tolerant control of
+propulsive spacecraft, where I simulate fault scenarios and evaluate their
+effect on path planning.
+
+I work model-based end to end: dynamic modelling in MATLAB/Simulink, Embedded
+Coder code generation onto Xilinx targets, and validation through xPC Target
+and Hardware-in-the-Loop testing. In my semester thesis at the Institute of
+Flight System Dynamics I extended an automated signal-integrity toolbox using
+MATLAB OOP and V-Model-based test harnesses.
+
+My embedded work spans generating Embedded C from Simulink models and
+deploying it onto Xilinx platforms, alongside formal coursework in Advanced
+Programming/C++ (1.7) and Real-Time Systems (2.0) at TUM.
+
+What draws me to Isar Aerospace SE specifically is the chance to apply this
+control- and systems-engineering background to real hardware rather than to
+models alone. I am based in Munich, available for a full-time start, and work
+comfortably in English with German at B1 and improving.
+
+I would welcome the opportunity to discuss how I can contribute to your team.
+
+Kind regards,
+Ömer Sayilgan
++49 155 10742256 | omersayilgan56@gmail.com
+Eschenbachstraße 9, Munich, Germany

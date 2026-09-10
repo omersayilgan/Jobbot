@@ -4,27 +4,23 @@ Two deliberate choices about counting:
 
 1. **Document frequency, not term frequency.** A posting that says "Python"
    nine times is one job wanting Python, not nine.
-2. **Company reach alongside job count.** Helsing alone accounts for ~40% of
-   the best-fit postings; without tracking distinct employers its house style
-   would masquerade as market demand.
+2. **Company reach alongside job count.** One prolific employer can easily
+   supply 40% of the best-fit postings; without tracking distinct employers
+   its house style would masquerade as market demand.
 """
 from __future__ import annotations
 
-import os
 import re
 from collections import defaultdict
 
-import yaml
-
 from . import db
-from .config import ROOT
+from .config import load_taxonomy
 
 MIN_FIT = 38          # tiers 1-3: the roles actually worth preparing for
 
 
 def _load_taxonomy() -> dict:
-    with open(os.path.join(ROOT, "skills_taxonomy.yaml"), "r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh)["groups"]
+    return load_taxonomy().get("groups", {})
 
 
 def _matcher(term: str):

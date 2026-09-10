@@ -23,13 +23,20 @@ def _key(cfg: dict) -> str:
     return (cfg.get("jooble") or {}).get("api_key", "")
 
 
+def _where(cfg: dict) -> str:
+    """Search city — the profile's own, not a hardcoded one."""
+    return (cfg.get("jooble") or {}).get("location") \
+        or cfg.get("filters", {}).get("location_label") \
+        or (cfg.get("profile") or {}).get("city") or ""
+
+
 def probe(slug: str, cfg: dict) -> int | None:
     key = _key(cfg)
     if not key:
         return None
     try:
         r = requests.post(API.format(key=key),
-                          json={"keywords": "engineer", "location": "Munich"},
+                          json={"keywords": "engineer", "location": _where(cfg)},
                           timeout=cfg.get("fetch", {}).get("request_timeout", 20))
         if r.status_code == 200:
             return r.json().get("totalCount")
@@ -44,14 +51,15 @@ def fetch(slug: str, company: str, cfg: dict) -> list[Job]:
         raise RuntimeError("Jooble key missing — add jooble.api_key to config.yaml "
                            "(free at https://jooble.org/api/about)")
 
-    queries = (cfg.get("jooble") or {}).get("queries") or DEFAULT_QUERIES
+    queries = ((cfg.get("jooble") or {}).get("queries")
+               or (cfg.get("adzuna") or {}).get("queries") or DEFAULT_QUERIES)
     seen: set[str] = set()
     jobs: list[Job] = []
 
     for q in queries:
         try:
             r = requests.post(API.format(key=key),
-                              json={"keywords": q, "location": "Munich", "radius": "25"},
+                              json={"keywords": q, "location": _where(cfg), "radius": "25"},
                               timeout=cfg.get("fetch", {}).get("request_timeout", 20))
             if r.status_code != 200:
                 break

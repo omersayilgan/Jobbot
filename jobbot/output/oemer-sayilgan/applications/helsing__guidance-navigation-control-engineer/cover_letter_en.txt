@@ -1,0 +1,43 @@
+10 September 2026
+
+Application: Guidance, Navigation, & Control Engineer
+Helsing
+Ref: 4972083101
+
+Dear Hiring Team,
+
+I am applying for the position of Guidance, Navigation, & Control Engineer at
+Helsing. I am an M.Sc. student in Aerospace at Technische Universität München,
+graduating soon, and the role's focus on control systems and GNC lines up
+closely with my background and my hands-on experience.
+
+My hands-on work in control systems and GNC includes: designed PID and Robust
+Controllers for a high-precision missile seeker gimbal system using classical
+and modern control techniques; and conducted Real-Time (RT) testing and PID
+tuning via xPC Target and Hardware-in-the-Loop (HIL) setups. Master’s Thesis
+(ongoing): Fault-Tolerant Control of Propulsive Spacecraft Systems –
+categorizing spacecraft dynamics and control redundancies, simulating fault
+scenarios, and evaluating their effect on path planning. Academically this is
+backed by Dynamics (BA), Control Systems (BA).
+
+My hands-on work in model-based design and simulation includes: developed and
+simulated dynamic models in MATLAB/Simulink for performance analysis and
+controller validation; and generated Embedded C code from Simulink models and
+deployed onto Xilinx hardware platforms. Semester Thesis: Extended an
+automated signal integrity check toolbox at the Institute of Flight System
+Dynamics – developed MATLAB OOP classes, automated Simulink model generation
+via scripts, and implemented V-Model-based testing with code compliance
+(Mrails) and test harness structures. Academically this is backed by MATLAB /
+Simulink for Computer Aided Engineeri (2.0), Numerical Methods (CB).
+
+What draws me to Helsing specifically is the opportunity to apply this
+experience to work that ships rather than to exercises. I am based in Munich,
+available for a full-time start, and work comfortably in English, with German
+at B1 and improving.
+
+I would welcome the opportunity to discuss how I can contribute to your team.
+
+Kind regards,
+Ömer Sayilgan
++49 155 10742256 | omersayilgan56@gmail.com
+Eschenbachstraße 9, Munich

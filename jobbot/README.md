@@ -1,44 +1,117 @@
-# jobbot — Munich engineering job search automation
+# jobbot — job search automation, driven by your own CV
 
-Finds full-time engineering roles in the Munich area, scores them against your
-CV, drafts a tailored cover letter for each, and tracks every application —
-so the only manual step left is a quick review and the submit click.
+Reads your CV and transcripts, works out what you are actually good at, finds
+matching full-time roles near you, scores each one against your evidence,
+drafts a tailored cover letter, and tracks every application — so the only
+manual step left is a quick review and the submit click.
 
-## Why it works this way
+Nothing about the tool is specific to one person or one field. Point it at a
+different folder of documents and it reconfigures itself: a marketing manager
+in Berlin and a flight-software engineer in Munich get different scoring rules,
+different exclusions, different search queries and different letters, from the
+same code.
 
-This tool pulls from **official public ATS APIs** — the same endpoints that
-power each company's own careers page — and stops just short of the submit
-button. You keep a 30-second review per job; everything else is automated.
+## The two modes
 
-### On LinkedIn and Indeed
-
-Their postings are reachable; their sites are not.
-
-**Do not scrape either.** LinkedIn's User Agreement prohibits automated access
-and enforcement costs you the account you need for the job search itself.
-Indeed closed its Publisher API to new applicants in 2023 and its RSS endpoint
-returns HTTP 403 to programmatic clients.
-
-**Use a licensed aggregator instead.** `jsearch` queries JSearch on RapidAPI,
-which licenses and indexes Indeed, LinkedIn, Glassdoor and ZipRecruiter
-postings. You query JSearch, never those sites, so there is no terms breach and
-no account to ban. Add a key to `config.yaml` and an entry under `jsearch:` in
-`companies.yaml` to switch it on — the free tier is ~200 requests/month, so the
-query list is deliberately short.
-
-`adzuna`, `arbeitnow` and `jooble` cover the same ground from other angles.
-Arbeitnow needs no key at all and is on by default.
-
-Alongside all of this, set up saved-search email alerts on LinkedIn and Indeed
-directly. That is a supported feature and it reaches employers no API does.
-
-## Setup
+**Setup mode** (`setup.py`) reads your documents and writes your profile.
+**Run mode** (`run.py`) is the daily loop and behaves exactly as it always has.
 
 ```bash
 pip install -r requirements.txt
+sudo apt install poppler-utils        # for pdftotext; skip if you have it
+
+mkdir -p documents                    # put your CV + transcripts here
+python3 setup.py                      # read them, generate your profile
+python3 run.py fetch                  # pull and score postings
+python3 run.py review                 # work the queue in your browser
 ```
 
-That's it — no API keys, no accounts, no browser automation.
+No API keys, no accounts, no model in the loop. The setup step is pure offline
+text matching against a bundled ontology of professions, places and grade
+scales — your documents never leave the machine.
+
+## What setup.py actually does
+
+1. **Reads every document** in `documents/` (and the parent folder), and
+   classifies each as a CV, a transcript, a certificate or a reference.
+   PDF, DOCX and plain text all work.
+2. **Parses the CV** for name, contacts, city, languages, career stage,
+   employment dates, job titles and the bullet points under each role.
+3. **Parses the transcripts** — detecting the grade scale first, because 1.0 is
+   the best grade in Germany and close to the worst in the US. It handles the
+   German 1.0–5.0 scale, Turkish AA–FF, US letters, ECTS, percentages and
+   Indian CGPA.
+4. **Matches all of it against the ontology** in `jobbot/ontology/` to decide
+   which of 33 professional domains you have real evidence for — weighting a
+   job title you have held above a tool you once listed, and professional
+   evidence above coursework.
+5. **Reads the transcripts relatively.** A subject counts as a strength or a
+   weakness by its distance from *your own* average, not an absolute cutoff, so
+   the layer survives different grading cultures and grade inflation.
+6. **Writes a profile** under `profiles/<you>/`:
+
+| File | What it holds |
+|---|---|
+| `profile.yaml` | Every fact inferred from your documents. The source of truth. |
+| `config.yaml` | Scoring rules: domain weights, title bonuses, seniority, language, exclusions. |
+| `letters.yaml` | Cover-letter evidence, quoted from your own CV bullets. |
+| `skills_taxonomy.yaml` | have / partial / gap per skill, for the gap analysis. |
+| `companies.yaml` | Where to fetch postings from. |
+| `narrative.yaml` | The wording the generated reports use to talk about you. |
+
+Everything the tool inferred is visible in `profile.yaml`. When it guesses
+wrong, fix that one file and run `python3 setup.py --regenerate` — no PDF is
+re-parsed and nothing else is touched.
+
+## setup.py commands
+
+| Command | What it does |
+|---|---|
+| `setup.py` | Read `documents/`, build a profile, make it active. |
+| `setup.py --documents DIR` | Read documents from somewhere else. |
+| `setup.py --regenerate` | Rebuild the configs from an edited `profile.yaml`. |
+| `setup.py --preset munich-deeptech` | Add a curated employer registry from `presets/`. |
+| `setup.py --list` | List profiles; `*` marks the active one. |
+| `setup.py --use <name>` | Switch the active profile. |
+| `setup.py --force` | Overwrite an existing profile. |
+| `setup.py --name "..."` / `--slug ...` | Override the name read from the CV. |
+
+Several people can share one checkout: each gets a profile directory and its
+own `output/<profile>/` with its own job database and application history.
+`run.py profile` shows who the tool is currently working for.
+
+## Where the postings come from
+
+**Aggregators work for anyone, anywhere, with no curation.** setup.py writes
+the search queries from your own role families and city, so `run.py fetch`
+returns useful results immediately. Arbeitnow needs no key and is on by default
+for German-speaking countries; Adzuna, JSearch and Jooble each take a free key.
+
+**Company ATS boards give much better data** — full descriptions rather than
+snippets, which is what the scorer and the gap analysis feed on. Grow your own
+registry with `run.py discover --url <careers page>`, or start from a preset in
+`presets/` if one fits your market.
+
+## Adding to the ontology
+
+The tool is only as good as `jobbot/ontology/`, and those files are plain YAML
+meant to be edited:
+
+- `professions.yaml` — 33 domains, each with the terms that identify it in a
+  posting, the job titles that mean the role *is* that domain, and the words
+  that identify it in a transcript course name. Copy the shape of an existing
+  entry to add a field; nothing in the code hardcodes a domain name.
+- `locations.yaml` — 26 metro areas with their suburbs and the nearby cities
+  that are *not* commutable. Unlisted city? It falls back to the city name plus
+  its country, which works, just less forgivingly.
+- `grades.yaml` — grade scales and how to recognise them.
+- `market.yaml` — title exclusions, seniority bands, language requirements,
+  agency names and the letter skeletons.
+
+A term that is an ordinary English word in another context will poison the
+analysis — `fluent` matched every advert asking for fluent German before it was
+qualified to `ansys fluent`. If a skill shows up with an implausible job count,
+that is almost always the cause.
 
 ## Daily workflow
 
@@ -56,10 +129,13 @@ application pack**, **Mark applied**, **Skip**.
 ```
 cover_letter_en.txt   tailored letter, in the posting's own language
 cv.pdf                your CV
-Transcript.pdf        supporting documents
-GoetheInstitut_B1.pdf
+Transcript.pdf        supporting documents named in your profile
 APPLY.md              apply link, fit breakdown, submit checklist
 ```
+
+The letter is assembled, not generated: the scorer already knows which of your
+domains the posting asked for, so the letter leads with the bullets from your
+own CV that prove exactly those, in the posting's own language.
 
 Read the letter, tweak the company paragraph, export to PDF, submit.
 
@@ -73,6 +149,7 @@ Read the letter, tweak the company paragraph, export to PDF, submit.
 | `run.py pack <uid>` | Build pack(s). `--top 10` for the ten best, `--lang de/en` to force language. |
 | `run.py status <uid> applied` | Update status: `shortlisted`, `applied`, `rejected`, `interview`, `offer`, `skipped`. |
 | `run.py stats` | Pipeline summary. |
+| `run.py profile` | Show the active profile. `--use <name>` to switch. |
 | `run.py discover <slug>` | Find which ATS a company uses, to add it to the registry. |
 | `run.py skills` | PDF analysis of the skills these jobs demand and where your gaps are. `--min-fit` sets the score cutoff (default 38). |
 | `run.py reconcile` | Rebuild application history from the pack folders on disk. |

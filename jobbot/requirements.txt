@@ -1,2 +1,6 @@
 requests>=2.31
 PyYAML>=6.0
+
+# Optional: PDF rendering for `run.py skills`. The HTML report is written
+# either way, so this is a convenience rather than a requirement.
+# weasyprint>=60

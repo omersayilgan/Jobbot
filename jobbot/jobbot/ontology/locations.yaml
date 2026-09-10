@@ -1,0 +1,240 @@
+# ============================================================
+#  Metro-area definitions.
+#
+#  A job's location string is messy ("Ottobrunn, Bavaria, Germany",
+#  "Greater London", "Germany - remote"). Setup picks the metro matching the
+#  city on the CV and writes its town list into the profile's filters.
+#
+#  Not in the list? Setup falls back to `generic`: the city name plus its
+#  country's remote anchors. That works, it is just less forgiving about
+#  suburbs, so add a metro entry if you live in one.
+# ============================================================
+
+metros:
+  munich:
+    label: Munich
+    country: de
+    aliases: [munich, münchen, muenchen, munchen]
+    region: [bavaria, bayern]
+    towns: [ottobrunn, taufkirchen, parsdorf, garching, oberpfaffenhofen, weßling, wessling,
+            gilching, unterschleißheim, unterschleissheim, ismaning, neubiberg, vaterstetten,
+            kirchheim, feldkirchen, aschheim, planegg, martinsried, germering, puchheim,
+            oberhaching, grünwald, gruenwald, dachau, freising, starnberg, gauting,
+            fürstenfeldbruck, fuerstenfeldbruck, augsburg, olching, karlsfeld, haar, poing]
+    region_excludes: [nuremberg, nürnberg, nuernberg, würzburg, wuerzburg, regensburg,
+                      ingolstadt, erlangen, bayreuth, bamberg, passau, aschaffenburg,
+                      kempten, landshut, rosenheim, schweinfurt, fürth, fuerth]
+  berlin:
+    label: Berlin
+    country: de
+    aliases: [berlin]
+    region: [brandenburg]
+    towns: [potsdam, teltow, kleinmachnow, schönefeld, schoenefeld, oranienburg, falkensee,
+            hennigsdorf, ludwigsfelde, bernau]
+    region_excludes: [cottbus, frankfurt (oder), brandenburg an der havel, eberswalde]
+  hamburg:
+    label: Hamburg
+    country: de
+    aliases: [hamburg]
+    region: [schleswig-holstein, niedersachsen]
+    towns: [norderstedt, pinneberg, ahrensburg, wedel, buxtehude, stade, lüneburg, lueneburg,
+            reinbek, seevetal, finkenwerder]
+    region_excludes: [kiel, lübeck, luebeck, flensburg, hannover, braunschweig, oldenburg]
+  frankfurt:
+    label: Frankfurt
+    country: de
+    aliases: [frankfurt, frankfurt am main, "frankfurt/main"]
+    region: [hessen, hesse]
+    towns: [offenbach, eschborn, bad homburg, darmstadt, wiesbaden, mainz, hanau, rüsselsheim,
+            ruesselsheim, neu-isenburg, kelsterbach, dreieich, oberursel, langen]
+    region_excludes: [kassel, fulda, marburg, gießen, giessen]
+  stuttgart:
+    label: Stuttgart
+    country: de
+    aliases: [stuttgart]
+    region: [baden-württemberg, baden-wuerttemberg, baden-wurttemberg]
+    towns: [böblingen, boeblingen, sindelfingen, esslingen, ludwigsburg, leonberg, waiblingen,
+            fellbach, weissach, renningen, kornwestheim, filderstadt, nürtingen, tübingen, tuebingen]
+    region_excludes: [karlsruhe, mannheim, freiburg, heidelberg, ulm, konstanz, heilbronn]
+  cologne:
+    label: Cologne / Düsseldorf
+    country: de
+    aliases: [cologne, köln, koeln, düsseldorf, duesseldorf, dusseldorf]
+    region: [nordrhein-westfalen, north rhine-westphalia, nrw]
+    towns: [leverkusen, bonn, neuss, ratingen, hilden, monheim, bergisch gladbach, hürth,
+            huerth, troisdorf, langenfeld, dormagen, erkrath]
+    region_excludes: [dortmund, essen, bochum, münster, muenster, bielefeld, aachen, duisburg,
+                      wuppertal, paderborn, siegen]
+  nuremberg:
+    label: Nuremberg
+    country: de
+    aliases: [nuremberg, nürnberg, nuernberg]
+    region: [bavaria, bayern]
+    towns: [erlangen, fürth, fuerth, schwabach, herzogenaurach, forchheim, lauf, roth, zirndorf]
+    region_excludes: [munich, münchen, muenchen, regensburg, würzburg, wuerzburg, ingolstadt,
+                      augsburg, bayreuth, bamberg]
+  hannover:
+    label: Hannover
+    country: de
+    aliases: [hannover, hanover]
+    region: [niedersachsen, lower saxony]
+    towns: [langenhagen, garbsen, laatzen, hildesheim, celle, wunstorf, burgdorf, lehrte]
+    region_excludes: [braunschweig, wolfsburg, osnabrück, oldenburg, göttingen, emden]
+  bremen:
+    label: Bremen
+    country: de
+    aliases: [bremen]
+    region: [niedersachsen, lower saxony]
+    towns: [delmenhorst, bremerhaven, achim, weyhe, stuhr, oyten, verden]
+    region_excludes: [hannover, oldenburg, osnabrück]
+  leipzig:
+    label: Leipzig
+    country: de
+    aliases: [leipzig]
+    region: [sachsen, saxony]
+    towns: [halle, markkleeberg, schkeuditz, grimma, borna, taucha]
+    region_excludes: [dresden, chemnitz, zwickau]
+  dresden:
+    label: Dresden
+    country: de
+    aliases: [dresden]
+    region: [sachsen, saxony]
+    towns: [radebeul, freital, pirna, meißen, meissen, coswig, heidenau]
+    region_excludes: [leipzig, chemnitz, zwickau, görlitz]
+  karlsruhe:
+    label: Karlsruhe
+    country: de
+    aliases: [karlsruhe]
+    region: [baden-württemberg, baden-wuerttemberg]
+    towns: [ettlingen, bruchsal, rastatt, pforzheim, bretten, waldbronn, eggenstein]
+    region_excludes: [stuttgart, mannheim, freiburg, ulm, heilbronn]
+  vienna:
+    label: Vienna
+    country: at
+    aliases: [vienna, wien]
+    region: [niederösterreich, lower austria]
+    towns: [schwechat, klosterneuburg, mödling, moedling, wiener neustadt, baden bei wien,
+            brunn am gebirge, korneuburg]
+    region_excludes: [graz, linz, salzburg, innsbruck, klagenfurt]
+  zurich:
+    label: Zurich
+    country: ch
+    aliases: [zurich, zürich, zuerich]
+    region: [switzerland, schweiz]
+    towns: [winterthur, dübendorf, duebendorf, wallisellen, schlieren, dietikon, zug, baden,
+            uster, opfikon, glattbrugg]
+    region_excludes: [geneva, genève, lausanne, basel, bern, lugano, st. gallen]
+  amsterdam:
+    label: Amsterdam
+    country: nl
+    aliases: [amsterdam]
+    region: [netherlands, nederland, noord-holland]
+    towns: [haarlem, amstelveen, hoofddorp, schiphol, zaandam, almere, hilversum, utrecht]
+    region_excludes: [rotterdam, the hague, den haag, eindhoven, groningen, maastricht]
+  london:
+    label: London
+    country: uk
+    aliases: [london, greater london]
+    region: [united kingdom, england, uk]
+    towns: [croydon, watford, slough, reading, uxbridge, stratford, canary wharf, richmond,
+            kingston, brentford, staines, woking, st albans]
+    region_excludes: [manchester, birmingham, leeds, bristol, glasgow, edinburgh, cambridge,
+                      oxford, liverpool, newcastle, cardiff, sheffield]
+  paris:
+    label: Paris
+    country: fr
+    aliases: [paris, "île-de-france", ile-de-france]
+    region: [france]
+    towns: [boulogne-billancourt, saint-denis, nanterre, versailles, courbevoie, issy-les-moulineaux,
+            levallois, montreuil, créteil, creteil, la défense, la defense, saclay, massy]
+    region_excludes: [lyon, marseille, toulouse, bordeaux, lille, nantes, nice, strasbourg,
+                      grenoble, rennes]
+  madrid:
+    label: Madrid
+    country: es
+    aliases: [madrid]
+    region: [spain, españa, espana]
+    towns: [alcobendas, getafe, leganés, leganes, tres cantos, las rozas, pozuelo, alcalá de henares,
+            móstoles, mostoles, fuenlabrada]
+    region_excludes: [barcelona, valencia, seville, sevilla, bilbao, malaga, zaragoza]
+  milan:
+    label: Milan
+    country: it
+    aliases: [milan, milano]
+    region: [italy, italia, lombardia, lombardy]
+    towns: [monza, sesto san giovanni, rho, segrate, bergamo, como, pavia, varese, cinisello]
+    region_excludes: [rome, roma, turin, torino, naples, napoli, bologna, florence, firenze, genoa]
+  istanbul:
+    label: Istanbul
+    country: tr
+    aliases: [istanbul, i̇stanbul]
+    region: [türkiye, turkey, turkiye]
+    towns: [kocaeli, gebze, izmit, tuzla, pendik, kartal, maltepe, beykoz, silivri, çerkezköy]
+    region_excludes: [ankara, izmir, bursa, antalya, adana, konya, gaziantep, eskişehir]
+  ankara:
+    label: Ankara
+    country: tr
+    aliases: [ankara]
+    region: [türkiye, turkey, turkiye]
+    towns: [çankaya, cankaya, yenimahalle, etimesgut, sincan, gölbaşı, golbasi, kahramankazan,
+            akyurt, polatlı]
+    region_excludes: [istanbul, izmir, bursa, antalya, adana, konya, eskişehir]
+  dublin:
+    label: Dublin
+    country: ie
+    aliases: [dublin]
+    region: [ireland, éire]
+    towns: [swords, blanchardstown, sandyford, tallaght, dun laoghaire, maynooth, leixlip, bray]
+    region_excludes: [cork, galway, limerick, waterford, belfast]
+  stockholm:
+    label: Stockholm
+    country: se
+    aliases: [stockholm]
+    region: [sweden, sverige]
+    towns: [solna, kista, sundbyberg, nacka, täby, taby, huddinge, södertälje, sodertalje, uppsala]
+    region_excludes: [gothenburg, göteborg, malmö, malmo, lund, linköping, umeå]
+  copenhagen:
+    label: Copenhagen
+    country: dk
+    aliases: [copenhagen, københavn, kobenhavn]
+    region: [denmark, danmark]
+    towns: [frederiksberg, lyngby, ballerup, hvidovre, glostrup, roskilde, hillerød, taastrup]
+    region_excludes: [aarhus, odense, aalborg, esbjerg]
+  warsaw:
+    label: Warsaw
+    country: pl
+    aliases: [warsaw, warszawa]
+    region: [poland, polska, mazowieckie]
+    towns: [pruszków, piaseczno, legionowo, otwock, marki, ożarów, józefów]
+    region_excludes: [kraków, krakow, wrocław, wroclaw, poznań, gdańsk, gdansk, łódź, katowice]
+  prague:
+    label: Prague
+    country: cz
+    aliases: [prague, praha]
+    region: [czechia, czech republic, česko]
+    towns: [kladno, brandýs, říčany, ricany, beroun, mladá boleslav]
+    region_excludes: [brno, ostrava, plzeň, plzen, olomouc, liberec]
+
+# Country-level anchors: a "remote" posting tied to one of these is still
+# considered reachable, and the aggregators need the country code.
+countries:
+  de: {names: [germany, deutschland, europe, emea, dach], adzuna: de, language: de}
+  at: {names: [austria, österreich, europe, emea, dach], adzuna: at, language: de}
+  ch: {names: [switzerland, schweiz, suisse, europe, emea, dach], adzuna: ch, language: de}
+  nl: {names: [netherlands, nederland, benelux, europe, emea], adzuna: nl, language: nl}
+  uk: {names: [united kingdom, uk, england, britain, europe], adzuna: gb, language: en}
+  fr: {names: [france, europe, emea], adzuna: fr, language: fr}
+  es: {names: [spain, españa, europe, emea], adzuna: es, language: es}
+  it: {names: [italy, italia, europe, emea], adzuna: it, language: it}
+  tr: {names: [türkiye, turkey, turkiye, europe, emea], adzuna: null, language: tr}
+  ie: {names: [ireland, europe, emea], adzuna: ie, language: en}
+  se: {names: [sweden, sverige, nordics, europe, emea], adzuna: se, language: en}
+  dk: {names: [denmark, danmark, nordics, europe, emea], adzuna: null, language: en}
+  pl: {names: [poland, polska, europe, emea], adzuna: pl, language: pl}
+  cz: {names: [czechia, czech republic, europe, emea], adzuna: null, language: cs}
+  us: {names: [united states, usa, us, remote], adzuna: us, language: en}
+  ca: {names: [canada, remote], adzuna: ca, language: en}
+
+# Used when the CV's city matches no metro above.
+generic:
+  remote_anchors: [remote, anywhere, worldwide]

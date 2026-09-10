@@ -1,0 +1,236 @@
+# ============================================================
+#  Market rules: what to exclude, how seniority reads, how language
+#  requirements are worded, and the letter skeletons.
+#
+#  Kept separate from professions.yaml because this is about the *hiring
+#  market* rather than about the work itself.
+# ============================================================
+
+# ---------- title exclusions ----------
+exclude:
+  # Never wanted, whatever the profession: these are not jobs of the kind this
+  # tool is for.
+  always: [ausbildung, duales studium, dual study, apprentice, azubi, schüler,
+           ferienjob, initiativbewerbung, unsolicited, speculative application,
+           referendariat, praktikant]
+
+  # Dropped by career stage. A student is allowed to want a working-student
+  # role; someone with eight years of experience is not.
+  by_stage:
+    student: [phd, doktorand, promotion, head of, director, vp of, chief]
+    entry: [intern, internship, praktikum, werkstudent, working student, thesis,
+            abschlussarbeit, phd, doktorand, promotion, head of, director, vp of, chief]
+    mid: [intern, internship, praktikum, werkstudent, working student, thesis,
+          abschlussarbeit, phd, doktorand, promotion]
+    senior: [intern, internship, praktikum, werkstudent, working student, thesis,
+             abschlussarbeit, junior, graduate programme, phd, doktorand]
+    principal: [intern, internship, praktikum, werkstudent, working student, thesis,
+                junior, graduate programme, entry level, phd, doktorand]
+    leadership: [intern, internship, praktikum, werkstudent, working student, junior,
+                 graduate programme, entry level, phd, doktorand]
+
+  # Job families to filter out — *unless* the person works in that family, in
+  # which case the whole block is removed. This is the single most important
+  # generalisation in the file: the old hardcoded list excluded "sales", which
+  # would have made the tool useless for anyone in sales.
+  functions:
+    sales_marketing: [sales, account executive, account manager, marketing, vertrieb,
+                      content, communications, copywriter, social media, community,
+                      brand, partnership, growth]
+    hr_people: [recruiter, recruiting, talent acquisition, human resources, "people &",
+                personalreferent, hr business partner, payroll]
+    finance: [accountant, controller finance, buchhalter, financial analyst, treasury,
+              steuerfachangestellte, audit]
+    legal_compliance: [legal counsel, jurist, rechtsanwalt, compliance officer, notar]
+    product_project: [product manager, product owner, project manager, program manager,
+                      projektleiter, scrum master, delivery manager]
+    design_creative: [designer, ux, "ui/", art director, grafiker, architekt]
+    consulting_strategy: [business development, solution consultant, implementation consultant,
+                          unternehmensberater, strategy consultant]
+    supply_chain: [logistics coordinator, warehouse, lagerist, buyer, procurement, einkäufer,
+                   disponent, spedition]
+    operations_service: [servicetechniker, monteur, elektriker, elektroniker, anlagenmechaniker,
+                         schlosser, installateur, kältetechnik, heizung, sanitär, klimatechnik,
+                         hausmeister, fahrer, facility]
+    healthcare_clinical: [nurse, physician, pflege, arzt, therapist, apotheker, mfa]
+    education_training: [teacher, lehrer, trainer, dozent, erzieher, tutor]
+    software_engineering: [fachinformatiker]
+    finance_admin_generic: [office manager, executive assistant, sekretär, kaufmann, kauffrau,
+                            büromanagement, industriekaufmann, sachbearbeiter, customer support,
+                            support specialist, customer success, operations manager]
+
+# ---------- seniority ----------
+# Each stage says which wordings in a posting suit this person and which mean
+# the posting is aimed at someone else.
+seniority:
+  student:
+    boost:
+      12: [graduate, entry level, entry-level, junior, absolvent, berufseinsteiger,
+           "0-2 years", "1-2 years", "1-3 years", "2 years of experience", new graduate]
+    penalty:
+      -30: [principal, staff engineer, head of, director, vp of, chief, "10+ years",
+            "10 years of experience", "8+ years", teamleitung, team lead]
+      -16: [senior, lead engineer, expert, "5+ years", "5 years of experience",
+            "6+ years", "7+ years", erfahren]
+  entry:
+    boost:
+      12: [graduate, entry level, entry-level, junior, absolvent, berufseinsteiger,
+           "0-2 years", "1-2 years", "1-3 years", "2-4 years", "2 years of experience"]
+    penalty:
+      -30: [principal, staff engineer, head of, director, vp of, chief, "10+ years",
+            "10 years of experience", "8+ years", teamleitung]
+      -16: [senior, lead engineer, expert, "5+ years", "6+ years", "7+ years", erfahren]
+  mid:
+    boost:
+      12: ["2-4 years", "3+ years", "3-5 years", "2+ years", "3 years of experience",
+           mid-level, berufserfahrung]
+    penalty:
+      -24: [principal, head of, director, vp of, chief, "10+ years", "12+ years", teamleitung]
+      -10: [junior, entry level, entry-level, graduate programme, absolvent, working student]
+  senior:
+    boost:
+      14: [senior, "5+ years", "6+ years", "7+ years", "5-8 years", lead engineer, erfahren,
+           experienced]
+    penalty:
+      -20: [junior, entry level, entry-level, graduate, absolvent, berufseinsteiger,
+            "0-2 years", "1-2 years"]
+      -12: [head of, director, vp of, chief]
+  principal:
+    boost:
+      16: [principal, staff engineer, lead, "8+ years", "10+ years", expert, architect,
+           teamleitung, senior]
+    penalty:
+      -26: [junior, entry level, entry-level, graduate, absolvent, "0-2 years", "1-3 years"]
+  leadership:
+    boost:
+      18: [head of, director, vp of, chief, teamleitung, team lead, leiter, "10+ years",
+           people management, führungserfahrung]
+    penalty:
+      -26: [junior, entry level, entry-level, graduate, absolvent, working student, "0-2 years"]
+
+# ---------- local-language requirements ----------
+# `strict` wordings mean the posting genuinely needs near-native language;
+# `mild` means it is preferred. Penalties are applied only when the person's
+# own level is below the bar, so a native speaker sees none of this.
+language_requirements:
+  de:
+    strict: [fließend deutsch, fliessend deutsch, verhandlungssicher, deutsch c1, deutsch c2,
+             german c1, german c2, native german, muttersprache deutsch,
+             sehr gute deutschkenntnisse, fluent german, "fluent in german",
+             business level german, proficient in german]
+    mild: [gute deutschkenntnisse, german language skills, deutschkenntnisse,
+           grundkenntnisse deutsch, basic german]
+    english_ok: [english is our company language, english-speaking, no german required,
+                 company language is english, working language is english,
+                 english as the working language, english is the working language]
+  fr:
+    strict: [français courant, courant en français, native french, fluent french,
+             "french c1", bilingue français]
+    mild: [notions de français, french language skills, basic french]
+    english_ok: [english is our company language, working language is english, english-speaking]
+  es:
+    strict: [español nativo, fluent spanish, "spanish c1", nivel alto de español]
+    mild: [spanish language skills, basic spanish]
+    english_ok: [english is our company language, working language is english, english-speaking]
+  it:
+    strict: [italiano fluente, fluent italian, "italian c1", madrelingua italiana]
+    mild: [italian language skills, basic italian]
+    english_ok: [english is our company language, working language is english, english-speaking]
+  nl:
+    strict: [vloeiend nederlands, fluent dutch, "dutch c1", native dutch]
+    mild: [dutch language skills, basic dutch]
+    english_ok: [english is our company language, working language is english, english-speaking]
+  pl:
+    strict: [biegła znajomość języka polskiego, fluent polish, native polish]
+    mild: [polish language skills, basic polish]
+    english_ok: [english is our company language, working language is english]
+  tr:
+    strict: [ileri düzey türkçe, fluent turkish, native turkish]
+    mild: [turkish language skills, basic turkish]
+    english_ok: [english is our company language, working language is english]
+  cs:
+    strict: [plynulá čeština, fluent czech, native czech]
+    mild: [czech language skills, basic czech]
+    english_ok: [english is our company language, working language is english]
+
+# Penalty sizes by how far below the requirement the person is.
+language_penalty:
+  strict_far: -22       # they want C1+, you are B1 or below
+  strict_near: -10      # they want C1+, you are B2
+  mild: -8
+  english_boost: 10
+
+# What counts as enough. Levels are ordered; anything at or above `C1` clears
+# a strict requirement.
+language_levels: [A1, A2, B1, B2, C1, C2, Native]
+
+# ---------- staffing intermediaries ----------
+# Recruitment agencies repost roles that usually also exist at the hiring
+# company, where applying direct is better. Ranked down, never dropped.
+agencies:
+  penalty: -15
+  names: [personalvermittlung, personaldienstleist, zeitarbeit, recruitment, recruiting,
+          workwise, advergy, rocksolid, hays, randstad, adecco, manpower, experis, solcom,
+          etengo, michael page, robert half, sthree, brunel, ferchau, gulp, "consulting gmbh",
+          headhunter, staffing, talent partner]
+
+# ---------- fetch behaviour ----------
+fetch:
+  request_timeout: 20
+  delay_between_companies: 2.0
+  user_agent: "jobbot/2.0 (personal job search assistant)"
+
+# ---------- letter skeletons ----------
+# Placeholders are filled per posting. {evidence} is the generated,
+# domain-specific paragraph set; {focus} the matched domain's own phrasing.
+letter_templates:
+  en: |
+    {date}
+
+    Application: {title}
+    {company}{ref}
+
+    Dear Hiring Team,
+
+    I am applying for the position of {title} at {company}. I am {headline}, and the role's focus on {focus} lines up closely with my background and my hands-on experience.
+
+    {evidence}
+
+    What draws me to {company} specifically is the opportunity to apply this experience to work that ships rather than to exercises. I am based in {city}, available for a full-time start, and {language_note}.
+
+    I would welcome the opportunity to discuss how I can contribute to your team.
+
+    Kind regards,
+    {full_name}
+    {phone} | {email}
+    {address}
+  de: |
+    {date}
+
+    Bewerbung als {title}
+    {company}{ref}
+
+    Sehr geehrtes Recruiting-Team,
+
+    hiermit bewerbe ich mich auf die Position als {title} bei {company}. Ich bin {headline}, und der Schwerpunkt der Stelle auf {focus} passt sehr gut zu meinem Hintergrund und meiner praktischen Erfahrung.
+
+    {evidence}
+
+    Besonders reizt mich an {company} die Möglichkeit, diese Erfahrung in einem Umfeld einzusetzen, in dem Ergebnisse tatsächlich ausgeliefert werden. Ich wohne in {city}, stehe für einen Vollzeiteinstieg zur Verfügung und {language_note}.
+
+    Über die Gelegenheit zu einem persönlichen Gespräch würde ich mich sehr freuen.
+
+    Mit freundlichen Grüßen
+    {full_name}
+    {phone} | {email}
+    {address}
+
+language_notes:
+  en:
+    strong_local: "work comfortably in both English and {local_language}"
+    weak_local: "work comfortably in English, with {local_language} at {level} and improving"
+    english_only: "work in English"
+  de:
+    strong_local: "arbeite sicher auf Deutsch und Englisch"
+    weak_local: "arbeite sicher auf Englisch; meine Deutschkenntnisse liegen bei {level} und verbessern sich stetig"
+    english_only: "arbeite auf Englisch"

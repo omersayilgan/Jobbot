@@ -22,8 +22,12 @@ DETAIL = "https://{slug}.{host}.myworkdayjobs.com/wday/cxs/{slug}/{site}{path}"
 PUBLIC = "https://{slug}.{host}.myworkdayjobs.com/{site}{path}"
 
 # Searched one at a time; Workday matches these against the location facet.
-SEARCH_TERMS = ("Munich", "München", "Ottobrunn", "Taufkirchen", "Garching",
-                "Manching", "Unterschleissheim", "Ismaning")
+# Taken from the profile's own place list so the search follows the user.
+def _search_terms(cfg: dict) -> list[str]:
+    places = [p for p in cfg["filters"].get("locations", []) if p]
+    ambiguous = {a.lower() for a in cfg["filters"].get("ambiguous_locations", [])}
+    concrete = [p for p in places if p.lower() not in ambiguous]
+    return [p.title() for p in concrete[:8]] or ["Germany"]
 
 PAGE = 20
 MAX_DETAILS = 160         # ceiling on detail calls per company, per run
@@ -51,17 +55,17 @@ def probe(slug: str, cfg: dict, site: str = "Careers", host: str = "wd3") -> int
     return None
 
 
-def _munich_terms(cfg: dict) -> list[str]:
+def _allowed_terms(cfg: dict) -> list[str]:
     return [a.lower() for a in cfg["filters"]["locations"]]
 
 
 def fetch(slug: str, company: str, cfg: dict, site: str = "Careers",
           host: str = "wd3") -> list[Job]:
     list_url = LIST.format(slug=slug, host=host, site=site)
-    allowed = _munich_terms(cfg)
+    allowed = _allowed_terms(cfg)
     seen: dict[str, dict] = {}
 
-    for term in SEARCH_TERMS:
+    for term in _search_terms(cfg):
         offset = 0
         while True:
             r = _post(list_url, cfg, {"appliedFacets": {}, "limit": PAGE,

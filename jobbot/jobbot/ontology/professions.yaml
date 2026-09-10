@@ -1,0 +1,730 @@
+# ============================================================
+#  Profession & skill ontology
+#
+#  This file is the tool's knowledge of the working world. `setup.py` matches
+#  a CV and transcripts against it to decide which domains a person actually
+#  has evidence for, then generates a personal config from the domains that hit.
+#
+#  Schema per domain:
+#    label        human name, used as the taxonomy group heading
+#    family       broad sector, used for peer/aggregator query grouping
+#    titles       job-title phrases that mean "this role IS this domain"
+#    focus        cover-letter phrase, per language
+#    blurb        one clause describing the domain, used in generated narrative
+#    skills       {skill name: [posting terms]} — the scoring + gap vocabulary
+#    course_terms words that appear in *transcript course names* for this domain
+#                 (deliberately different vocabulary from job postings)
+#    tools        named tools/products; a CV hit here is strong evidence
+#
+#  Add a domain by copying the shape. Nothing in the code hardcodes a domain
+#  name, so a new entry is picked up automatically.
+# ============================================================
+
+domains:
+
+  # ---------------------------------------------------------------- engineering
+  control_gnc:
+    label: "Control, GNC & estimation"
+    family: engineering
+    titles: [control engineer, controls engineer, control systems engineer, gnc engineer,
+             guidance navigation, flight control engineer, regelungstechnik, regelungsingenieur,
+             control systems, gnc, adcs engineer, motion control engineer]
+    focus: {en: "control systems and GNC", de: "Regelungstechnik und GNC"}
+    blurb: "designing feedback laws that make a physical system behave"
+    skills:
+      Control design: [control system, control design, control engineer, regelung, regelungstechnik,
+                       pid, lqr, lqg, mpc, model predictive, robust control, nonlinear control,
+                       adaptive control, feedback control, closed-loop, closed loop, lyapunov,
+                       h-infinity, gain scheduling, controls]
+      GNC: [gnc, guidance navigation, flight control, attitude control, adcs, aocs,
+            guidance law, autopilot, navigation system]
+      State estimation: [kalman, extended kalman, state estimation, sensor fusion, ekf, ukf,
+                         particle filter, observer design, navigation filter]
+      System identification: [system identification, parameter estimation, modal analysis,
+                              grey-box, black-box model]
+      Fault tolerance: [fault-tolerant, fault tolerant, fdir, fault detection, fault diagnosis,
+                        redundancy management, health management]
+      Trajectory & planning: [path planning, trajectory planning, motion planning, trajectory optimization,
+                              guidance algorithm]
+    course_terms: [control, regelung, feedback, dynamics, gnc, estimation, kalman, optimal control,
+                   nonlinear, adaptive, system identification, flight control, mechatronic]
+    tools: [matlab, simulink, dspace, xpc target]
+
+  simulation_mbd:
+    label: "Modelling, simulation & test"
+    family: engineering
+    titles: [simulation engineer, modeling and simulation, model-based design, simulationsingenieur,
+             verification engineer, validation engineer, test engineer, integration engineer,
+             v&v engineer, hil engineer]
+    focus: {en: "model-based design and simulation", de: "modellbasierte Entwicklung und Simulation"}
+    blurb: "building and validating models of systems before they exist in metal"
+    skills:
+      Simulink / MBD: [simulink, model-based design, model based design, mbd, modellbasiert,
+                       stateflow, plant model, co-simulation, digital twin]
+      Code generation: [embedded coder, code generation, autocoding, targetlink, simulink coder]
+      HIL / SIL testing: [hardware-in-the-loop, hardware in the loop, hil, software-in-the-loop,
+                          sil, mil, xpc target, dspace, speedgoat, model-in-the-loop]
+      Simulation frameworks: [gazebo, isaac sim, mujoco, carla, modelica, dymola, amesim,
+                              simulation framework, monte carlo simulation]
+      Verification & validation: ["v&v", verification and validation, qualification testing,
+                                  acceptance test, dvp&r, test campaign, requirements verification]
+      Test automation: [test automation, pytest, unit test, integration test, googletest,
+                        ci testing, regression test, testautomatisierung]
+    course_terms: [simulation, modelling, modeling, modellbildung, numerical methods, cae,
+                   finite difference, matlab, simulink, verification, testing]
+    tools: [matlab, simulink, dspace, ansys, modelica]
+
+  embedded_realtime:
+    label: "Embedded & real-time software"
+    family: engineering
+    titles: [embedded software engineer, embedded engineer, embedded systems engineer,
+             firmware engineer, real-time software, echtzeit, software engineer c++,
+             embedded developer, flight software engineer, avionics software]
+    focus: {en: "embedded and real-time software", de: "Embedded- und Echtzeitsoftware"}
+    blurb: "software that runs directly on the hardware, under timing guarantees"
+    skills:
+      Embedded development: [embedded software, embedded systems, embedded c, firmware,
+                             microcontroller, bare-metal, mikrocontroller, stm32, arm cortex,
+                             device driver, board support package]
+      RTOS: [rtos, freertos, zephyr, vxworks, real-time operating, qnx, echtzeitbetriebssystem]
+      Real-time systems: [real-time, realtime, echtzeit, deterministic, latency budget,
+                          scheduling, wcet]
+      Bus protocols: [can bus, canopen, spi, i2c, uart, ethercat, profinet, modbus, "rs-485",
+                      rs485, lin bus, spacewire, "1553"]
+      FPGA / HDL: [fpga, vhdl, verilog, zynq, xilinx, quartus, vivado, systemverilog, hdl]
+      Safety-critical code: [misra, polyspace, static analysis, coding standard, lint, cert c,
+                             safety-critical, safety critical]
+    course_terms: [embedded, real-time, echtzeit, microprocessor, microcontroller, logic design,
+                   digital design, computer architecture, operating system, firmware]
+    tools: [keil, iar, stm32cube, vivado, lauterbach]
+
+  automation_plc:
+    label: "Industrial automation"
+    family: engineering
+    titles: [automation engineer, plc engineer, automatisierungstechniker, automatisierungsingenieur,
+             controls technician, commissioning engineer, inbetriebnahme, test bench engineer,
+             prüfstand, mechatronics engineer, mechatronik]
+    focus: {en: "industrial automation and test systems", de: "Industrieautomatisierung und Teststandstechnik"}
+    blurb: "making machines and plants run themselves on the factory floor"
+    skills:
+      PLC programming: [plc, sps, twincat, beckhoff, structured text, "iec 61131", codesys,
+                        siemens tia, step 7, allen bradley, rockwell, speicherprogrammierbare]
+      SCADA / HMI: [scada, hmi, wincc, visualisation, visualization, ignition, leitsystem]
+      Instrumentation: [sensor integration, instrumentation, calibration, kalibrierung,
+                        test bench, prüfstand, teststand, messtechnik, data acquisition, daq]
+      Field networks: [profinet, profibus, ethercat, modbus, io-link, "rs-485", rs485, opc ua]
+      Robotic cells: [robot cell, kuka, fanuc, abb robot, universal robots, cobot, roboterzelle]
+    course_terms: [automation, automatisierung, mechatronic, mechatronik, instrumentation,
+                   measurement, messtechnik, plc, manufacturing systems]
+    tools: [twincat, codesys, tia portal, labview, beckhoff]
+
+  robotics_autonomy:
+    label: "Robotics & autonomy"
+    family: engineering
+    titles: [robotics engineer, robotics software engineer, autonomy engineer, robotik,
+             motion planning engineer, navigation engineer, autonomous systems engineer]
+    focus: {en: "robotics and autonomous systems", de: "Robotik und autonome Systeme"}
+    blurb: "machines that sense, decide and move without a human in the loop"
+    skills:
+      ROS: [ros, robot operating system, rclcpp, rclpy, roscpp]
+      ROS 2: [ros2, "ros 2", dds, colcon]
+      Navigation & SLAM: [slam, localization, lokalisierung, visual odometry, occupancy grid,
+                          nav2, path following]
+      Manipulation: [manipulator, kinematics, inverse kinematics, moveit, grasping, end effector,
+                     robotic arm]
+      Autonomy stacks: [autonomous, autonomie, behaviour tree, behavior tree, mission planning,
+                        uav, drone, agv, amr, self-driving]
+    course_terms: [robotic, robotik, kinematics, autonomous, cyber-physical, ros, manipulator]
+    tools: [ros, gazebo, moveit, isaac]
+
+  aerospace:
+    label: "Aerospace & space systems"
+    family: engineering
+    titles: [aerospace engineer, avionics engineer, spacecraft engineer, satellite engineer,
+             launch vehicle engineer, propulsion engineer, mission analyst, luft- und raumfahrt,
+             flight dynamics engineer]
+    focus: {en: "aerospace systems", de: "Luft- und Raumfahrtsysteme"}
+    blurb: "vehicles that fly, and everything that has to work for them to"
+    skills:
+      Space systems: [spacecraft, satellite, satellit, launcher, launch vehicle, orbital,
+                      space segment, cubesat, payload, raumfahrt, ground segment]
+      Flight dynamics: [flight dynamics, flugdynamik, "6-dof", 6dof, aerodynamics, stability and control,
+                        trajectory, re-entry, astrodynamics, orbital mechanics]
+      Avionics: [avionics, avionik, flight computer, obc, on-board computer, aircraft systems]
+      Propulsion: [propulsion, triebwerk, rocket engine, thruster, gas turbine, jet engine,
+                   turbomachinery, antrieb]
+      Space standards: [ecss, "do-178", "do-254", arp4754, easa, airworthiness, nasa-std,
+                        space qualification]
+    course_terms: [aerospace, aircraft, spacecraft, flight, aerodynam*, orbital, propulsion,
+                   avionic*, luftfahrt, raumfahrt, gasdynam*, aeroelast*, rotorcraft, satellite,
+                   flugantrieb*, flugmechanik, astronautic*]
+    tools: [stk, gmat, freeflyer]
+
+  mech_design:
+    label: "Mechanical design & structures"
+    family: engineering
+    titles: [design engineer, mechanical engineer, konstrukteur, konstruktionsingenieur,
+             stress engineer, structural engineer, structural analysis engineer, cad engineer,
+             product design engineer, berechnungsingenieur]
+    focus: {en: "mechanical design and structural analysis", de: "Konstruktion und Strukturberechnung"}
+    blurb: "shaping parts and proving they will not break"
+    skills:
+      CAD: [cad, catia, solidworks, nx, creo, autocad, inventor, "3d modelling", "3d modeling",
+            konstruktion, technical drawing, gd&t, tolerance stack]
+      FEM / structural analysis: [finite element, fem, fea, ansys, abaqus, nastran, hypermesh,
+                                  stress analysis, structural analysis, festigkeit, strukturberechnung]
+      Machine elements: [machine element, maschinenelemente, bearing, gearbox, getriebe, linkage,
+                         mechanism design, drivetrain]
+      Materials & failure: [fatigue, fracture mechanics, damage tolerance, creep, corrosion,
+                            werkstoff, material selection, heat treatment, composite, tribology]
+      Vibration & dynamics: [vibration, schwingung, modal analysis, nvh, structural dynamics,
+                             rotor dynamics, acoustics]
+    course_terms: [statics, dynamics, strength of materials, machine element, maschinenelemente,
+                   mechanics, vibration, schwingung, finite element, material, werkstoff, konstruktion,
+                   design, cad, drawing, festigkeit, composite, fatigue, structural]
+    tools: [catia, solidworks, ansys, abaqus, nx]
+
+  thermofluids:
+    label: "Thermofluids & energy"
+    family: engineering
+    titles: [thermal engineer, cfd engineer, fluid dynamics engineer, hvac engineer,
+             process engineer thermal, energy engineer, thermodynamics engineer,
+             strömungsmechanik, verfahrensingenieur thermisch]
+    focus: {en: "thermal and fluid systems", de: "Thermo- und Strömungstechnik"}
+    blurb: "heat and flow — where energy goes and how fast"
+    skills:
+      CFD: [cfd, computational fluid, ansys fluent, star-ccm, openfoam, ansys cfx,
+            mesh generation, turbulence model, cfd simulation]
+      Thermal engineering: [thermal management, heat transfer, wärmeübertragung, thermal analysis,
+                            cooling system, thermodynamic, heat exchanger, wärmetauscher, cryogenic]
+      Fluid systems: [fluid mechanics, strömung, hydraulic, pneumatic, piping, pump, valve,
+                      two-phase flow, gas dynamics]
+      Energy systems: [energy system, renewable energy, power plant, kraftwerk, solar, wind turbine,
+                       heat pump, wärmepumpe, energiesystem, decarbonisation]
+      HVAC: [hvac, klimatechnik, lüftung, ventilation, refrigeration, kältetechnik]
+    course_terms: [thermodynamic, heat transfer, fluid, strömung, thermal, energy, energie,
+                   combustion, gas dynamics, turbomachinery, hvac, wärme, kälte]
+    tools: [fluent, star-ccm, openfoam]
+
+  electrical_power:
+    label: "Electrical power & drives"
+    family: engineering
+    titles: [electrical engineer, power electronics engineer, drives engineer, elektroingenieur,
+             elektrotechnik, motor control engineer, power systems engineer, hardware engineer electrical,
+             energietechnik]
+    focus: {en: "electrical drives and power electronics", de: "elektrische Antriebe und Leistungselektronik"}
+    blurb: "moving electrical energy and turning it into motion"
+    skills:
+      Power electronics: [power electronics, leistungselektronik, inverter, converter, dc-dc,
+                          rectifier, igbt, sic, gan, pwm, switching topology]
+      Electrical machines: [electrical machine, electric motor, pmsm, bldc, induction motor,
+                            servo drive, field-oriented control, foc, elektrische maschine, antrieb]
+      Power systems: [power system, grid, netz, transformer, high voltage, hochspannung,
+                      switchgear, protection relay, load flow]
+      Battery systems: [battery management, bms, lithium-ion, battery pack, state of charge,
+                        cell balancing, batterie, akku, charging]
+      Electrical design: [wiring harness, schaltplan, circuit diagram, eplan, electrical installation,
+                          cabinet, schaltschrank]
+    course_terms: [electrical, elektro, circuit, power electronic, machine, drive, energietechnik,
+                   electromagnetic, signals and systems]
+    tools: [eplan, plecs, ltspice]
+
+  electronics_hw:
+    label: "Electronics & hardware design"
+    family: engineering
+    titles: [hardware engineer, electronics engineer, pcb designer, analog engineer,
+             rf engineer, hardware design engineer, schaltungsentwicklung, hf-entwickler,
+             asic engineer, layout engineer]
+    focus: {en: "electronics and hardware design", de: "Elektronik- und Hardwareentwicklung"}
+    blurb: "designing the boards and circuits themselves"
+    skills:
+      Analog design: [analog circuit, analog electronics, operational amplifier, op-amp,
+                      signal conditioning, mixed-signal, adc, dac, noise budget]
+      PCB design: [pcb layout, pcb design, altium, kicad, eagle cad, schematic capture,
+                   leiterplatte, dfm]
+      RF & microwave: [rf engineer, "rf design", microwave, antenna design, hochfrequenz,
+                       s-parameter, radar front-end, transceiver]
+      EMC & compliance: [emc, emi, electromagnetic compatibility, emv, ce marking, esd,
+                         compliance testing]
+      Semiconductors: [asic, soc design, semiconductor, cmos, wafer, tape-out, verilog rtl,
+                       chip design, halbleiter]
+    course_terms: [electronic, analog, circuit, semiconductor, rf, high frequency, microelectronic,
+                   signal processing, electromagnetic]
+    tools: [altium, kicad, ltspice, cadence]
+
+  manufacturing:
+    label: "Manufacturing & production"
+    family: engineering
+    titles: [manufacturing engineer, production engineer, process engineer, industrial engineer,
+             fertigungsingenieur, produktionsingenieur, prozessingenieur, npi engineer,
+             lean engineer, quality engineer]
+    focus: {en: "manufacturing and production engineering", de: "Fertigungs- und Produktionstechnik"}
+    blurb: "turning a design into thousands of identical units, reliably and cheaply"
+    skills:
+      Production processes: [machining, cnc, casting, forming, injection molding, welding,
+                             additive manufacturing, "3d printing", zerspanung, fertigung, urformen]
+      Lean & industrial engineering: [lean manufacturing, six sigma, kaizen, value stream,
+                                      takt time, "5s", kanban, poka-yoke, oee, shop floor]
+      Quality engineering: [quality management, qualitätsmanagement, "iso 9001", spc,
+                            statistical process control, fmea, "8d", capa, ppap, apqp, inspection]
+      Industrialisation: [npi, new product introduction, industrialisation, ramp-up, serienanlauf,
+                          design for manufacture, dfm, dfa, tooling, fixture]
+      Reliability: [reliability engineering, mtbf, weibull, rams, availability, maintainability,
+                    accelerated life test, zuverlässigkeit]
+    course_terms: [manufacturing, production, fertigung, machining, materials processing, quality,
+                   industrial engineering, operations, lean]
+    tools: [minitab, sap pp]
+
+  civil_construction:
+    label: "Civil, structural & construction"
+    family: engineering
+    titles: [civil engineer, structural engineer building, bauingenieur, site engineer,
+             construction manager, tragwerksplaner, geotechnical engineer, project engineer construction,
+             quantity surveyor, bauleiter]
+    focus: {en: "civil and structural engineering", de: "Bauwesen und Tragwerksplanung"}
+    blurb: "the built environment — buildings, bridges, ground and infrastructure"
+    skills:
+      Structural design: [reinforced concrete, stahlbeton, steel structure, stahlbau, timber structure,
+                          tragwerk, load-bearing, eurocode, structural design, statik]
+      Geotechnics: [soil mechanics, geotechnical, foundation design, bodenmechanik, grundbau,
+                    pile foundation, retaining wall, slope stability]
+      Construction management: [construction management, bauleitung, site management, scheduling,
+                                bauablauf, tender, ausschreibung, vob, hoai, cost estimation]
+      Infrastructure: [road design, bridge design, brückenbau, tunnel, railway infrastructure,
+                       water supply, sewerage, hydrology, wasserbau]
+      BIM: [bim, revit, tekla, allplan, navisworks, building information modelling]
+    course_terms: [civil, structural, concrete, soil, geotechnic, hydraulic, construction, bau,
+                   surveying, transportation engineering]
+    tools: [revit, tekla, sofistik, autocad]
+
+  chemical_process:
+    label: "Chemical & process engineering"
+    family: engineering
+    titles: [process engineer, chemical engineer, verfahrensingenieur, verfahrenstechnik,
+             plant engineer, process development engineer, scale-up engineer, bioprocess engineer]
+    focus: {en: "process and chemical engineering", de: "Verfahrenstechnik"}
+    blurb: "reactions and separations at industrial scale"
+    skills:
+      Unit operations: [distillation, absorption, rectification, extraction, crystallisation, drying,
+                        filtration, separation, unit operation, destillation, rektifikation]
+      Reaction engineering: [reactor design, reaction engineering, kinetics, catalysis, katalyse,
+                             residence time, conversion yield, reaktor]
+      Process design: ["p&id", process flow diagram, pfd, flowsheet, aspen, hysys, chemcad,
+                       mass balance, energy balance, scale-up, prozessauslegung]
+      Plant operations: [commissioning, plant startup, gmp, "iso 14001", hazop, process safety,
+                         anlagenbau, betriebsführung]
+      Analytics: [chromatography, hplc, gc-ms, spectroscopy, titration, analytik, laboratory analysis]
+    course_terms: [chemical engineering, verfahrens*, reaction engineering, mass transfer,
+                   separation process, unit operation, bioprocess, process engineering,
+                   reaktionstechnik]
+    tools: [aspen, hysys, comsol]
+
+  environment_energy:
+    label: "Environment, sustainability & energy"
+    family: engineering
+    titles: [environmental engineer, sustainability engineer, energy consultant, umweltingenieur,
+             lca analyst, decarbonisation, carbon, esg analyst, water engineer]
+    focus: {en: "sustainability and energy systems", de: "Umwelt- und Energietechnik"}
+    blurb: "the resource and emissions side of any technical system"
+    skills:
+      Sustainability analysis: [life cycle assessment, lca, carbon footprint, "co2", ghg protocol,
+                                esg, sustainability reporting, csrd, ökobilanz]
+      Carbon & climate tech: [carbon capture, direct air capture, dac, ccus, sequestration,
+                              climate tech, emissions reduction, klimaschutz]
+      Water & waste: [wastewater, abwasser, water treatment, waste management, recycling,
+                      circular economy, kreislaufwirtschaft]
+      Energy efficiency: [energy efficiency, energieeffizienz, energy audit, building performance,
+                          heat recovery, techno-economic]
+      Permitting: [environmental permit, genehmigung, "iso 14001", environmental impact assessment,
+                   regulatory compliance environmental]
+    course_terms: [environmental, umwelt, sustainability, energy, renewable, climate, water, waste,
+                   ecology]
+    tools: [gabi, simapro, openlca]
+
+  biomedical:
+    label: "Biomedical & medical devices"
+    family: engineering
+    titles: [biomedical engineer, medical device engineer, medizintechnik, clinical engineer,
+             regulatory affairs engineer, r&d engineer medical, biomechanics engineer]
+    focus: {en: "medical device engineering", de: "Medizintechnik"}
+    blurb: "engineering that goes into or onto a human body"
+    skills:
+      Medical device development: [medical device, medizinprodukt, "iso 13485", "iec 62304",
+                                   "iso 14971", mdr, fda 510k, design control, risk management file]
+      Biomechanics: [biomechanics, biomechanik, gait analysis, prosthetic, orthopaedic implant,
+                     musculoskeletal]
+      Biosignals & imaging: [ecg, eeg, biosignal, medical imaging, mri, ct imaging, ultrasound,
+                             image segmentation, dicom]
+      Biomaterials: [biomaterial, biocompatibility, implant material, tissue engineering, scaffold]
+      Clinical & lab: [clinical trial, gcp, in vitro, in vivo, laboratory, sterilisation, cleanroom]
+    course_terms: [biomedical, biomechanic, physiology, anatomy, biology, medical, biomaterial, tissue]
+    tools: [dicom, comsol]
+
+  # ---------------------------------------------------------------- software & data
+  software_engineering:
+    label: "Software engineering"
+    family: software
+    titles: [software engineer, software developer, softwareentwickler, backend engineer,
+             full stack engineer, application developer, platform engineer, entwickler]
+    focus: {en: "software engineering", de: "Softwareentwicklung"}
+    blurb: "building and shipping software systems"
+    skills:
+      Programming languages: [python, java, "c#", golang, rust, typescript, javascript, kotlin,
+                             scala, ruby, php]
+      "C / C++": ["c++", cpp, "modern c++", "c++17", "c++20", embedded c, c programming]
+      Backend & APIs: [rest api, graphql, microservice, backend, api design, grpc, spring boot,
+                       django, fastapi, "node.js"]
+      Architecture & practice: [software architecture, design patterns, clean code, code review,
+                                refactoring, solid principles, domain-driven]
+      Version control & CI: [git, gitlab, github, version control, "ci/cd", continuous integration,
+                             jenkins, github actions, gitlab ci, build pipeline]
+      Agile practice: [agile, scrum, kanban, sprint, jira, confluence, product backlog]
+    course_terms: [programming, software, algorithm, data structure, computer science, informatik,
+                   object-oriented, compiler, operating system, database]
+    tools: [git, docker, jira, vscode]
+
+  web_frontend:
+    label: "Web & frontend"
+    family: software
+    titles: [frontend engineer, frontend developer, web developer, ui engineer, fullstack developer,
+             webentwickler]
+    focus: {en: "web and frontend development", de: "Web- und Frontend-Entwicklung"}
+    blurb: "the part of a product a user actually touches"
+    skills:
+      Frontend frameworks: [react, vue, angular, svelte, "next.js", nuxt, frontend framework]
+      Web fundamentals: [html, css, sass, tailwind, responsive design, accessibility, wcag,
+                         browser compatibility]
+      Frontend tooling: [webpack, vite, npm, typescript, jest, cypress, playwright, storybook]
+      Mobile: [ios, android, swift, kotlin, react native, flutter, mobile app]
+    course_terms: [web, internet technology, human-computer interaction, user interface]
+    tools: [react, figma, npm]
+
+  devops_cloud:
+    label: "DevOps, cloud & infrastructure"
+    family: software
+    titles: [devops engineer, site reliability engineer, sre, platform engineer, cloud engineer,
+             infrastructure engineer, systems administrator, systemadministrator]
+    focus: {en: "cloud infrastructure and DevOps", de: "Cloud-Infrastruktur und DevOps"}
+    blurb: "the machinery that runs software in production"
+    skills:
+      Containers & orchestration: [docker, container, kubernetes, k8s, helm, podman, containerd]
+      Cloud platforms: [aws, azure, "gcp", google cloud, cloud infrastructure, ec2, s3, lambda,
+                        cloud native]
+      Infrastructure as code: [terraform, ansible, pulumi, cloudformation, infrastructure as code,
+                               configuration management]
+      Linux & networking: [linux, ubuntu, debian, bash, shell scripting, tcp/ip, networking,
+                           firewall, nginx, proxmox, virtualisation]
+      Observability: [prometheus, grafana, monitoring, observability, logging, elk, datadog,
+                      alerting, influxdb]
+      Reliability practice: [sre, incident response, on-call, postmortem, high availability, slo]
+    course_terms: [operating system, network, distributed system, computer network, systems administration]
+    tools: [docker, kubernetes, terraform, grafana, proxmox]
+
+  data_engineering:
+    label: "Data engineering & analytics"
+    family: software
+    titles: [data engineer, data analyst, analytics engineer, business intelligence, bi developer,
+             datenanalyst, database administrator]
+    focus: {en: "data engineering and analytics", de: "Data Engineering und Analytics"}
+    blurb: "moving data from where it is produced to where a decision is made"
+    skills:
+      SQL & databases: [sql, postgres, postgresql, mysql, database, oracle db, snowflake, bigquery,
+                        data warehouse, query optimisation, indexing]
+      Pipelines & ETL: [etl, elt, data pipeline, airflow, dbt, apache kafka, apache spark,
+                        batch processing, stream processing, datenpipeline]
+      Analysis & BI: [tableau, power bi, looker, dashboard, data visualisation, data visualization,
+                      reporting, kpi, excel modelling, pandas]
+      Time series & telemetry: [time series, influxdb, timescale, telemetry, sensor data, historian]
+      Statistics: [statistics, statistik, regression, hypothesis test, a/b test, confidence interval,
+                   experimental design, doe]
+    course_terms: [database, data, statistic, probability, stochastic, analytics, information system]
+    tools: [sql, tableau, power bi, airflow]
+
+  machine_learning:
+    label: "Machine learning & AI"
+    family: software
+    titles: [machine learning engineer, ml engineer, ai engineer, data scientist, research scientist,
+             deep learning engineer, computer vision engineer, nlp engineer]
+    focus: {en: "machine learning and AI", de: "Machine Learning und KI"}
+    blurb: "models learned from data rather than written by hand"
+    skills:
+      ML fundamentals: [machine learning, deep learning, neural network, supervised learning,
+                        model training, feature engineering, scikit-learn, maschinelles lernen]
+      Frameworks: [pytorch, tensorflow, keras, jax, hugging face, onnx]
+      Computer vision: [computer vision, opencv, image processing, object detection, segmentation,
+                        point cloud, lidar processing, perception]
+      NLP & LLM: [nlp, natural language, llm, large language model, transformer, embedding,
+                  rag, prompt engineering]
+      Reinforcement learning: [reinforcement learning, deep reinforcement, policy gradient,
+                               reward shaping, q-learning]
+      MLOps: [mlops, model deployment, model monitoring, feature store, experiment tracking, mlflow]
+    course_terms: [machine learning, artificial intelligence, neural, pattern recognition,
+                   data mining, statistics, optimization, computer vision]
+    tools: [pytorch, tensorflow, opencv]
+
+  cybersecurity:
+    label: "Cybersecurity"
+    family: software
+    titles: [security engineer, cybersecurity analyst, information security, penetration tester,
+             soc analyst, it-sicherheit, security architect]
+    focus: {en: "information security", de: "IT-Sicherheit"}
+    blurb: "keeping systems working when someone is trying to break them"
+    skills:
+      Security operations: [soc, siem, incident response, threat detection, vulnerability management,
+                            penetration testing, pentest, red team]
+      Application security: [appsec, secure coding, owasp, static application security, sast, dast,
+                             threat modelling]
+      Cryptography & identity: [cryptography, kryptographie, pki, tls, oauth, identity management,
+                                zero trust, encryption]
+      Governance & compliance: ["iso 27001", nis2, gdpr, dsgvo, bsi grundschutz, risk assessment,
+                                audit, soc 2]
+      Network security: [firewall, ids, ips, network security, vpn, segmentation]
+    course_terms: [security, cryptography, network security, information security]
+    tools: [wireshark, burp, splunk]
+
+  # ---------------------------------------------------------------- science
+  natural_science:
+    label: "Natural sciences & research"
+    family: science
+    titles: [research scientist, scientist, physicist, chemist, laboratory technician,
+             r&d scientist, postdoctoral, wissenschaftlicher mitarbeiter, laborant]
+    focus: {en: "scientific research", de: "wissenschaftliche Forschung"}
+    blurb: "producing new knowledge under experimental discipline"
+    skills:
+      Experimental method: [experimental design, laboratory, labor, measurement uncertainty,
+                            calibration standard, sample preparation, protocol, reproducibility]
+      Physics: [physics, physik, optics, photonics, laser, spectroscopy, quantum, plasma,
+                cryogenics, vacuum system, nuclear, radiation]
+      Chemistry: [chemistry, chemie, organic chemistry, analytical chemistry, synthesis,
+                  electrochemistry, polymer chemistry, materials chemistry]
+      Life sciences: [biology, biologie, molecular biology, cell culture, microbiology, genomics,
+                      pcr, assay, biotechnology, pharmaceutical]
+      Scientific computing: [numerical simulation, monte carlo, computational modelling, comsol,
+                             finite difference, high performance computing, scientific python]
+      Publication: [peer-reviewed, publication, conference paper, grant proposal, literature review]
+    course_terms: [physics, physik, chemistry, chemie, biology, biologie, optics, photonics,
+                   spectroscopy, quantum, laboratory, organic chemistry, analytical chemistry,
+                   molecular, genetics, astronomy]
+    tools: [labview, origin, comsol, matlab]
+
+  # ---------------------------------------------------------------- business
+  finance:
+    label: "Finance & accounting"
+    family: business
+    titles: [financial analyst, controller, accountant, buchhalter, finance manager, treasury,
+             investment analyst, auditor, wirtschaftsprüfer, fp&a]
+    focus: {en: "finance and controlling", de: "Finanzen und Controlling"}
+    blurb: "the money view of an organisation"
+    skills:
+      Accounting: [accounting, buchhaltung, ifrs, hgb, gaap, month-end close, general ledger,
+                   accounts payable, accounts receivable, reconciliation]
+      Controlling & FP&A: [controlling, budgeting, forecasting, variance analysis, cost center,
+                           management reporting, "fp&a", business case]
+      Valuation & investment: [valuation, dcf, financial modelling, due diligence, m&a, portfolio,
+                               equity research, risk management financial]
+      Treasury & tax: [treasury, cash flow management, liquidity, tax, steuer, transfer pricing,
+                       hedging]
+      Finance systems: [sap fi, sap co, datev, netsuite, excel modelling, power bi finance]
+    course_terms: [finance, accounting, buchhaltung, cost accounting, corporate finance,
+                   investment, taxation, controlling]
+    tools: [sap, excel, datev]
+
+  consulting_strategy:
+    label: "Strategy & consulting"
+    family: business
+    titles: [consultant, strategy consultant, business analyst, management consultant,
+             unternehmensberater, business development manager, operations analyst]
+    focus: {en: "strategy and business analysis", de: "Strategie und Unternehmensberatung"}
+    blurb: "structuring a business problem and recommending what to do"
+    skills:
+      Analysis & structuring: [market analysis, competitive analysis, business case, hypothesis-driven,
+                               benchmarking, feasibility study, marktanalyse]
+      Stakeholder work: [stakeholder management, workshop facilitation, executive presentation,
+                         change management, client engagement]
+      Operating model: [process optimisation, prozessoptimierung, operating model, transformation,
+                        cost reduction, org design]
+      Data-backed recommendation: [quantitative analysis, modelling assumptions, roi, kpi definition,
+                                   scenario analysis]
+    course_terms: [strategic management, business strategy, corporate strategy, consulting,
+                   entrepreneurship]
+    tools: [powerpoint, excel, tableau]
+
+  product_project:
+    label: "Product & project management"
+    family: business
+    titles: [product manager, product owner, project manager, program manager, projektleiter,
+             projektmanager, scrum master, technical program manager, delivery manager]
+    focus: {en: "product and project management", de: "Produkt- und Projektmanagement"}
+    blurb: "deciding what gets built and making sure it lands"
+    skills:
+      Product management: [product roadmap, product strategy, user research, requirements gathering,
+                           backlog prioritisation, mvp, product discovery, go-to-market]
+      Project delivery: [project management, projektmanagement, gantt, milestone, critical path,
+                         budget tracking, risk register, resource planning, pmp, prince2]
+      Agile leadership: [scrum master, agile coach, sprint planning, retrospective, safe framework,
+                         kanban board]
+      Cross-functional delivery: [stakeholder alignment, vendor management, steering committee,
+                                  escalation management, cross-functional leadership]
+    course_terms: [project management, projektmanagement, product management, engineering project]
+    tools: [jira, ms project, asana, confluence]
+
+  sales_marketing:
+    label: "Sales & marketing"
+    family: business
+    titles: [sales manager, account executive, business development, marketing manager,
+             growth manager, vertrieb, key account manager, brand manager, content manager]
+    focus: {en: "sales and marketing", de: "Vertrieb und Marketing"}
+    blurb: "finding customers and convincing them"
+    skills:
+      Sales: [sales pipeline, crm, salesforce, hubspot, lead generation, account management,
+              negotiation, quota, b2b sales, vertrieb, angebotserstellung]
+      Marketing: [marketing strategy, campaign management, brand, positioning, content marketing,
+                  seo, sem, social media, email marketing, marketingstrategie]
+      Growth & analytics: [growth marketing, conversion rate, funnel, attribution, google analytics,
+                           a/b testing, customer acquisition cost]
+      Communication: [copywriting, presentation, public relations, storytelling, product marketing]
+    course_terms: [marketing, sales, consumer behaviour, advertising, market research]
+    tools: [salesforce, hubspot, google analytics]
+
+  hr_people:
+    label: "HR & people operations"
+    family: business
+    titles: [hr manager, people operations, recruiter, talent acquisition, personalreferent,
+             hr business partner, personalentwicklung, compensation analyst]
+    focus: {en: "human resources", de: "Personalwesen"}
+    blurb: "hiring, developing and keeping the people"
+    skills:
+      Recruiting: [talent acquisition, recruiting, sourcing, applicant tracking, interview process,
+                   employer branding, onboarding, personalgewinnung]
+      HR operations: [payroll, lohnabrechnung, hr administration, employment contract, arbeitsrecht,
+                      time tracking, hris, workday hcm, personalverwaltung]
+      People development: [performance management, learning and development, coaching,
+                           succession planning, personalentwicklung, engagement survey]
+      Compensation: [compensation and benefits, salary benchmarking, vergütung, incentive plan]
+    course_terms: [human resource, personalwesen, labour law, arbeitsrecht, organisational behaviour]
+    tools: [personio, workday, sap hr]
+
+  supply_chain:
+    label: "Supply chain & logistics"
+    family: business
+    titles: [supply chain manager, logistics manager, procurement, buyer, einkäufer,
+             disponent, materials planner, warehouse manager, logistik, strategic sourcing]
+    focus: {en: "supply chain and procurement", de: "Supply Chain und Einkauf"}
+    blurb: "getting the right things to the right place at the right cost"
+    skills:
+      Procurement: [procurement, purchasing, einkauf, supplier management, sourcing, rfq,
+                    contract negotiation, lieferantenmanagement, cost savings]
+      Planning: [demand planning, production planning, mrp, inventory management, "s&op",
+                 forecasting demand, bestandsmanagement, disposition]
+      Logistics: [logistics, logistik, freight, warehouse, distribution, incoterms, customs,
+                  zoll, transport management, lagerverwaltung]
+      Supply chain systems: [sap mm, sap sd, erp, wms, supply chain visibility, track and trace]
+    course_terms: [logistics, logistik, supply chain, operations research, operations management,
+                   inventory, scheduling, procurement]
+    tools: [sap, excel]
+
+  legal_compliance:
+    label: "Legal, compliance & regulatory"
+    family: business
+    titles: [legal counsel, compliance officer, regulatory affairs, jurist, rechtsanwalt,
+             contract manager, data protection officer, datenschutzbeauftragter]
+    focus: {en: "legal and regulatory affairs", de: "Recht und Compliance"}
+    blurb: "the rules an organisation has to operate inside"
+    skills:
+      Contracts: [contract drafting, contract management, vertragsrecht, nda, terms and conditions,
+                  licensing agreement, commercial law]
+      Compliance: [compliance, anti-corruption, kyc, aml, internal audit, whistleblowing,
+                   code of conduct, export control, itar, dual-use]
+      Data protection: [gdpr, dsgvo, data protection, data privacy, privacy by design,
+                        datenschutz, dpia, privacy impact]
+      Regulatory affairs: [regulatory affairs, ce marking, product certification, notified body,
+                           market approval, zulassung, technical documentation]
+      Intellectual property: [patent, intellectual property, trademark, ip strategy, patentrecht]
+    course_terms: [law, recht, legal, compliance, ethics, regulation]
+    tools: [docusign]
+
+  # ---------------------------------------------------------------- other sectors
+  healthcare_clinical:
+    label: "Healthcare & clinical practice"
+    family: healthcare
+    titles: [nurse, physician, doctor, pflegefachkraft, arzt, therapist, medical technologist,
+             clinical specialist, pharmacist, apotheker, radiographer]
+    focus: {en: "clinical practice", de: "klinische Praxis"}
+    blurb: "direct care and treatment of patients"
+    skills:
+      Clinical care: [patient care, clinical assessment, treatment plan, diagnosis, patientenversorgung,
+                      ward, intensive care, emergency care, pflege]
+      Clinical procedures: [medication administration, infusion, wound care, vital signs, triage,
+                            surgical assistance, anaesthesia]
+      Documentation & standards: [clinical documentation, patient record, hygiene standard,
+                                  quality of care, "iso 15189", accreditation, dokumentation]
+      Diagnostics: [laboratory diagnostics, imaging, radiology, pathology, point of care testing]
+    course_terms: [medicine, medizin, nursing, pflege, anatomy, physiology, pharmacology, clinical,
+                   health]
+    tools: []
+
+  education_training:
+    label: "Education & training"
+    family: education
+    titles: [teacher, lecturer, trainer, dozent, lehrer, instructor, education specialist,
+             academic tutor, learning designer]
+    focus: {en: "teaching and training", de: "Lehre und Weiterbildung"}
+    blurb: "transferring capability to other people"
+    skills:
+      Teaching: [curriculum development, lesson planning, teaching, lehre, unterricht, assessment design,
+                 student supervision, tutoring, didaktik]
+      Training delivery: [workshop delivery, corporate training, e-learning, instructional design,
+                          onboarding training, schulung]
+      Academic work: [research supervision, thesis supervision, academic writing, lecture, seminar]
+    course_terms: [education, pedagogy, didactic, teaching, psychology]
+    tools: [moodle]
+
+  design_creative:
+    label: "Design & creative"
+    family: creative
+    titles: [ux designer, ui designer, product designer, graphic designer, industrial designer,
+             architect, architekt, art director, motion designer]
+    focus: {en: "design", de: "Design"}
+    blurb: "how a thing looks, feels and is understood"
+    skills:
+      UX / UI: [ux design, ui design, user experience, wireframe, prototype, figma, usability testing,
+                design system, interaction design]
+      Visual design: [graphic design, typography, branding, adobe illustrator, photoshop, indesign,
+                      layout, visual identity]
+      Industrial & architectural design: [industrial design, product design, "3d rendering",
+                                          building architecture, architectural design, architekturbüro,
+                                          rhino 3d, keyshot, bauentwurf]
+      Research: [user research, persona, journey mapping, design thinking, a/b design test]
+    course_terms: [architecture, architektur, industrial design, human factors, ergonomics,
+                   typography, visual communication, interaction design]
+    tools: [figma, adobe, blender, rhino]
+
+  operations_service:
+    label: "Operations & field service"
+    family: operations
+    titles: [operations manager, service engineer, field service, servicetechniker, maintenance engineer,
+             instandhaltung, technician, techniker, facility manager, plant operator]
+    focus: {en: "operations and technical service", de: "Betrieb und technischer Service"}
+    blurb: "keeping things running once they are installed"
+    skills:
+      Maintenance: [preventive maintenance, predictive maintenance, instandhaltung, wartung,
+                    troubleshooting, root cause analysis, downtime, spare parts, cmms]
+      Field service: [field service, customer site, installation, commissioning, inbetriebnahme,
+                      service report, on-site support, kundendienst]
+      Operations management: [shift planning, sop, standard operating procedure, capacity utilisation,
+                              operational kpi, health and safety, arbeitssicherheit]
+    course_terms: [maintenance, operations, reliability, safety, occupational health]
+    tools: [sap pm]
+
+# ---------------------------------------------------------------- cross-cutting
+# Applied to every profile regardless of domain: eligibility and general practice
+# items that gate applications rather than describe a specialism.
+universal:
+  label: "Eligibility & language"
+  skills:
+    Work authorisation: [work permit, arbeitserlaubnis, visa sponsorship, eu citizenship,
+                         eu national, work authorisation, staatsangehörigkeit, blue card]
+    Security clearance: [security clearance, sicherheitsüberprüfung, "ü2", "nato secret",
+                         clearance required, verschlusssache, "sÜg"]
+    Export control: [export control, itar, dual-use, ear99, exportkontrolle]
+    Driving licence: [driving licence, driver's license, führerschein, "class b licence"]

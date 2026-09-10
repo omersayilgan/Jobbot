@@ -27,12 +27,9 @@ from .base import get, strip_html
 NAME = "adzuna"
 API = "https://api.adzuna.com/v1/api/jobs/{country}/search/{page}"
 
-DEFAULT_QUERIES = [
-    "control engineer", "regelungstechnik", "embedded software engineer",
-    "simulation engineer", "automation engineer", "robotics engineer",
-    "systems engineer", "test engineer", "mechatronics engineer",
-    "flight software", "matlab simulink", "plc engineer",
-]
+# Only used when the profile carries no queries of its own — setup.py writes
+# them from the person's actual role families.
+DEFAULT_QUERIES = ["engineer", "developer", "analyst", "manager", "specialist"]
 
 
 def probe(slug: str, cfg: dict) -> int | None:
@@ -42,7 +39,7 @@ def probe(slug: str, cfg: dict) -> int | None:
     try:
         r = get(API.format(country=slug or "de", page=1), cfg, params={
             "app_id": creds["app_id"], "app_key": creds["app_key"],
-            "results_per_page": 1, "where": "munich"})
+            "results_per_page": 1, "where": creds.get("where") or "germany"})
         if r.status_code == 200:
             return r.json().get("count")
     except Exception:
@@ -57,7 +54,7 @@ def fetch(slug: str, company: str, cfg: dict) -> list[Job]:
             "Adzuna credentials missing — add adzuna.app_id / app_key to "
             "config.yaml (free key at https://developer.adzuna.com/)")
 
-    country = slug or "de"
+    country = slug or creds.get("country") or "de"
     queries = creds.get("queries") or DEFAULT_QUERIES
     radius = creds.get("distance_km", 25)
     seen: set[str] = set()
@@ -68,7 +65,8 @@ def fetch(slug: str, company: str, cfg: dict) -> list[Job]:
             try:
                 r = get(API.format(country=country, page=page), cfg, params={
                     "app_id": creds["app_id"], "app_key": creds["app_key"],
-                    "results_per_page": 50, "what": q, "where": "munich",
+                    "results_per_page": 50, "what": q,
+                    "where": creds.get("where") or "germany",
                     "distance": radius, "full_time": 1,
                     "content-type": "application/json"})
                 if r.status_code != 200:
